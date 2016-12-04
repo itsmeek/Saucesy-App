@@ -8,22 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		99E7C23C1DF38DBB0032A888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */; };
-		99E7C23E1DF38DBB0032A888 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C23D1DF38DBB0032A888 /* ViewController.swift */; };
 		99E7C2411DF38DBB0032A888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99E7C23F1DF38DBB0032A888 /* Main.storyboard */; };
 		99E7C2441DF38DBB0032A888 /* Saucesy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C2421DF38DBB0032A888 /* Saucesy.xcdatamodeld */; };
 		99E7C2461DF38DBB0032A888 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99E7C2451DF38DBB0032A888 /* Assets.xcassets */; };
 		99E7C2491DF38DBB0032A888 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99E7C2471DF38DBB0032A888 /* LaunchScreen.storyboard */; };
+		99E7C2551DF390BD0032A888 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C2541DF390BD0032A888 /* TabBarController.swift */; };
+		99E7C2571DF39FD40032A888 /* recipesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C2561DF39FD40032A888 /* recipesVC.swift */; };
+		99E7C2591DF3B91D0032A888 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C2581DF3B91D0032A888 /* Extensions.swift */; };
+		99E7C25B1DF3BAC90032A888 /* recipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C25A1DF3BAC90032A888 /* recipeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		99E7C2381DF38DBB0032A888 /* Saucesy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saucesy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		99E7C23D1DF38DBB0032A888 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		99E7C2401DF38DBB0032A888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99E7C2431DF38DBB0032A888 /* Saucesy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Saucesy.xcdatamodel; sourceTree = "<group>"; };
 		99E7C2451DF38DBB0032A888 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		99E7C2481DF38DBB0032A888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		99E7C24A1DF38DBB0032A888 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99E7C2541DF390BD0032A888 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		99E7C2561DF39FD40032A888 /* recipesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipesVC.swift; sourceTree = "<group>"; };
+		99E7C2581DF3B91D0032A888 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		99E7C25A1DF3BAC90032A888 /* recipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +62,11 @@
 		99E7C23A1DF38DBB0032A888 /* Saucesy */ = {
 			isa = PBXGroup;
 			children = (
+				99E7C2501DF38F740032A888 /* Model */,
+				99E7C2511DF38F7F0032A888 /* View */,
+				99E7C2521DF38F870032A888 /* Controller */,
+				99E7C2531DF38F8F0032A888 /* Utilities */,
 				99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */,
-				99E7C23D1DF38DBB0032A888 /* ViewController.swift */,
 				99E7C23F1DF38DBB0032A888 /* Main.storyboard */,
 				99E7C2451DF38DBB0032A888 /* Assets.xcassets */,
 				99E7C2471DF38DBB0032A888 /* LaunchScreen.storyboard */,
@@ -65,6 +74,38 @@
 				99E7C2421DF38DBB0032A888 /* Saucesy.xcdatamodeld */,
 			);
 			path = Saucesy;
+			sourceTree = "<group>";
+		};
+		99E7C2501DF38F740032A888 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		99E7C2511DF38F7F0032A888 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99E7C25A1DF3BAC90032A888 /* recipeCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		99E7C2521DF38F870032A888 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				99E7C2541DF390BD0032A888 /* TabBarController.swift */,
+				99E7C2561DF39FD40032A888 /* recipesVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		99E7C2531DF38F8F0032A888 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				99E7C2581DF3B91D0032A888 /* Extensions.swift */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,9 +181,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99E7C2591DF3B91D0032A888 /* Extensions.swift in Sources */,
+				99E7C2571DF39FD40032A888 /* recipesVC.swift in Sources */,
 				99E7C2441DF38DBB0032A888 /* Saucesy.xcdatamodeld in Sources */,
-				99E7C23E1DF38DBB0032A888 /* ViewController.swift in Sources */,
+				99E7C2551DF390BD0032A888 /* TabBarController.swift in Sources */,
 				99E7C23C1DF38DBB0032A888 /* AppDelegate.swift in Sources */,
+				99E7C25B1DF3BAC90032A888 /* recipeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

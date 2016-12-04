@@ -17,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //Create what main.stroyboard will create for us
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.makeKeyAndVisible()
+        
+        //Set the root view controller to a custom tab bar controller created 
+        window?.rootViewController = TabBarController()
+        
+        UINavigationBar.appearance().barTintColor = UIColor.saucesyRed
+        
+        application.statusBarStyle = .lightContent
+
+        
         return true
     }
 
