@@ -350,6 +350,7 @@
 				99E7C24F1DF38DBB0032A888 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

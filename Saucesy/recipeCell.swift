@@ -27,9 +27,10 @@ class recipeCell: UICollectionViewCell {
     }()
     
     func setupViews(){
+        //Sets background color and adds subtle shadow
         backgroundColor = UIColor.white
-        
         addShadow()
+        
         addSubview(foodImage)
         
         //Constraints

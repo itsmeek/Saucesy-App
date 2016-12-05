@@ -23,7 +23,7 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         navigationController?.navigationBar.isTranslucent = false
         
         collectionView?.backgroundColor = UIColor(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0)
-        
+                
         //Programatically sets the reuse identifier
         collectionView?.register(recipeCell.self, forCellWithReuseIdentifier: recipeCellId)
         
