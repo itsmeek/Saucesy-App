@@ -15,9 +15,27 @@ class TabBarController: UITabBarController {
         let layout = UICollectionViewFlowLayout()
         let recipesController = recipesVC(collectionViewLayout: layout)
         let recipesNC = UINavigationController(rootViewController: recipesController)
-        recipesNC.tabBarItem.title = "Recipes"
-        recipesNC.tabBarItem.image = UIImage(named: "recipesBarItem")
         
+        //Changes text color of tab bar bottom text
+        let attributesNormal = [
+            NSForegroundColorAttributeName : UIColor.saucesyBlue,
+            NSFontAttributeName : UIFont(name: "Avenir", size: 10.0)!
+        ] as [String : Any]
+        
+        let attributesSelected = [
+            NSForegroundColorAttributeName : UIColor.saucesyRed,
+            NSFontAttributeName : UIFont(name: "Avenir", size: 10.0)!
+            ] as [String : Any]
+        
+        UITabBarItem.appearance().setTitleTextAttributes(attributesNormal, for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes(attributesSelected, for: .selected)
+        
+        //Changes image of tab bar
+        recipesNC.tabBarItem = UITabBarItem(title: "Recipes", image: UIImage(named: "recipesBarItem")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "recipesBarItemFilled"))
+        
+        //Tint color of selected Item
+        self.tabBar.tintColor = UIColor.saucesyRed
+
         //Array of view controllers in tab bar
         viewControllers = [recipesNC, createController(controllerName: "ingredients"), createController(controllerName: "list"), createController(controllerName: "liked")]
     }
@@ -25,8 +43,9 @@ class TabBarController: UITabBarController {
     private func createController(controllerName: String) -> UINavigationController {
         let viewController = UIViewController()
         let navController = UINavigationController(rootViewController: viewController)
-        navController.tabBarItem.title = "\(controllerName)".capitalized
-        navController.tabBarItem.image = UIImage(named: "\(controllerName)BarItem")
+        
+        navController.tabBarItem = UITabBarItem(title: "\(controllerName)".capitalized, image: UIImage(named: "\(controllerName)BarItem")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "\(controllerName)BarItemFilled"))
+
         return navController
     }
     
