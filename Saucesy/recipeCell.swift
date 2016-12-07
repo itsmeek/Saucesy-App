@@ -109,55 +109,51 @@ class recipeCell: UICollectionViewCell {
         backgroundColor = UIColor.white
         addShadow()
         
-        //        bringSubview(toFront: likeButton)
-        addSubview(likeButton)
-        
         addSubview(recipeImage)
         addSubview(recipeName)
+        addSubview(likeButton)
         
         //Constraints for food Image
         addConstraintsWithFormat(format: "H:|[v0]|", views: recipeImage)
         addConstraintsWithFormat(format: "V:|[v0(222)]", views: recipeImage)
         
-        //        //Constraints for recipeDescription
-        addConstraint(NSLayoutConstraint(item: recipeDescription, attribute: .left, relatedBy: .equal, toItem: recipeImage, attribute: .left, multiplier: 1, constant: 20))
-        addConstraint(NSLayoutConstraint(item: recipeDescription, attribute: .right, relatedBy: .equal, toItem: recipeImage, attribute: .right, multiplier: 1, constant: -20))
-        addConstraint(NSLayoutConstraint(item: recipeDescription, attribute: .height, relatedBy: .equal, toItem: self , attribute: .height, multiplier: 0, constant: 57))
-        //
-        //        //Stackview for recipeCalories and recipeServings
+        //Constraints for food Name
+        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .top, relatedBy: .equal, toItem: recipeImage, attribute: .bottom, multiplier: 1, constant: 16))
+        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .left, relatedBy: .equal, toItem: recipeImage, attribute: .left, multiplier: 1, constant: 20))
+        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .right, relatedBy: .equal, toItem: recipeImage, attribute: .right, multiplier: 1, constant: -20))
+        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .height, relatedBy: .equal, toItem: self , attribute: .height, multiplier: 0, constant: 18))
+        
+        
+        //Stackview for recipeCalories and recipeServings ([calories][servings])
         let recipeInfoStackView = UIStackView(arrangedSubviews: [recipeCalories, recipeServings])
         recipeInfoStackView.axis = .horizontal
         recipeInfoStackView.distribution = .fillProportionally
         recipeInfoStackView.alignment = .leading
         recipeInfoStackView.spacing = 10
         recipeInfoStackView.translatesAutoresizingMaskIntoConstraints = false
-        //
-        //        //Stackview for recipeInfo and recipeDescription
+        
+        //Stackview for recipeInfo([calories][servings]) and recipeDescription
         let recipeDetailsStackView = UIStackView(arrangedSubviews: [recipeDescription, recipeInfoStackView])
         recipeDetailsStackView.axis = .vertical
-        recipeDetailsStackView.distribution = .fillProportionally
+        recipeDetailsStackView.distribution = .fill
         recipeDetailsStackView.alignment = .leading
         recipeDetailsStackView.spacing = 12
         recipeDetailsStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(recipeDetailsStackView)
-        //
-        //
-        //        likeButton.bringSubview(toFront: self)
-        insertSubview(likeButton, aboveSubview: recipeDetailsStackView)
         
-        
-        
-        
-        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .top, relatedBy: .equal, toItem: recipeImage, attribute: .bottom, multiplier: 1, constant: 16))
-        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .left, relatedBy: .equal, toItem: recipeImage, attribute: .left, multiplier: 1, constant: 20))
-        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .right, relatedBy: .equal, toItem: recipeImage, attribute: .right, multiplier: 1, constant: -20))
-        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .height, relatedBy: .equal, toItem: self , attribute: .height, multiplier: 0, constant: 18))
-        //
-        ////
+        //Constraints for RecipeDetails StackView
         addConstraint(NSLayoutConstraint(item: recipeDetailsStackView, attribute: .top, relatedBy: .equal, toItem: recipeName, attribute: .bottom, multiplier: 1, constant: 4))
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: recipeDetailsStackView)
         addConstraintsWithFormat(format: "V:[v0]-0-|", views: recipeDetailsStackView)
-        //
+        
+        //Constraints for recipeDescription
+        addConstraint(NSLayoutConstraint(item: recipeDescription, attribute: .width, relatedBy: .equal, toItem: recipeDetailsStackView, attribute: .width, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: recipeDescription, attribute: .height, relatedBy: .equal, toItem: self , attribute: .height, multiplier: 0, constant: 57))
+        
+        //Maskes sure that stack view is not covering the like button
+        insertSubview(likeButton, aboveSubview: recipeDetailsStackView)
+        
+        //Like Button Constraints
         addConstraintsWithFormat(format: "H:[v0]-36-|", views: likeButton)
         addConstraintsWithFormat(format: "V:[v0]-14-|", views: likeButton)
         
