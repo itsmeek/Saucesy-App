@@ -23,17 +23,19 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         navigationController?.navigationBar.isTranslucent = false
         
         collectionView?.backgroundColor = UIColor(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0)
-                
+        
         //Programatically sets the reuse identifier
         collectionView?.register(recipeCell.self, forCellWithReuseIdentifier: recipeCellId)
         
         collectionView?.showsVerticalScrollIndicator = false
         
+        setupNavBar()
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recipeCellId, for: indexPath)
         
+        cell.tag = indexPath.row
         return cell
     }
     
@@ -57,7 +59,15 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         }
     }
     
+    func setupNavBar(){
+        let filterNavIcon = UIImage(named: "filterNavIcon")?.withRenderingMode(.alwaysOriginal)
+        let filterBarIcon = UIBarButtonItem(image: filterNavIcon, style: .plain, target: self, action: #selector(handleFilter))
+        navigationItem.rightBarButtonItem = filterBarIcon
+    }
     
+    func handleFilter(){
+        print("124")
+    }
 }
 
 
