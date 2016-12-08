@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol Dismissing {
+    func dismiss()
+}
+
 class recipeDetailVC: UITableViewController {
 
     private let cellId = "homeDetailcellId"
@@ -26,6 +30,8 @@ class recipeDetailVC: UITableViewController {
         
         super.viewDidLoad()
         styleComponents()
+        
+        dismissButton()
         
         tableView.delegate = self
         
@@ -64,11 +70,27 @@ class recipeDetailVC: UITableViewController {
         tableView.showsVerticalScrollIndicator = false
     }
     
+    func dismissButton(){
+        let button = UIButton()
+        button.backgroundColor = UIColor.red
+        button.setTitle("Name your Button ", for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.view.addSubview(button)
+        
+        self.view.addConstraintsWithFormat(format: "H:|-16-[v0(200)]", views: button)
+        self.view.addConstraintsWithFormat(format: "V:[v0(200)]|", views: button)
+    }
+    
+    func buttonAction(sender: UIButton!) {
+        print("Button tapped")
+    }
 
-}
+
 
 //Custom Header
 class igredientsCellHeader: UITableViewHeaderFooterView{
+    
+    var delegate: Dismissing? = nil
         
     override init(reuseIdentifier: String?){
         super.init(reuseIdentifier: reuseIdentifier)
@@ -97,6 +119,9 @@ class igredientsCellHeader: UITableViewHeaderFooterView{
     }()
     
     func dismissVC(){
+        if delegate != nil{
+         self.delegate?.dismiss()
+        }
 //        recipeDetailVC.navigationController?.popToRootViewController(animated: true)
     }
  
@@ -110,9 +135,11 @@ class igredientsCellHeader: UITableViewHeaderFooterView{
         
         addConstraintsWithFormat(format: "H:|-16-[v0(28)]", views: closeButton)
         addConstraintsWithFormat(format: "V:|-25-[v0(28)]", views: closeButton)
+        
     }
 }
 
 
 class ingredientsCell:UITableViewCell{
+}
 }

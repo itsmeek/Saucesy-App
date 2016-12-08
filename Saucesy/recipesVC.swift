@@ -8,7 +8,7 @@
 
 import UIKit
 
-class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Dismissing {
     
     private let recipeCellId = "recipeCellId"
     
@@ -22,6 +22,10 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         //Programatically sets the reuse identifier
         collectionView?.register(recipeCell.self, forCellWithReuseIdentifier: recipeCellId)
         
+    }
+    
+    func dismiss() {
+        navigationController?.popToRoot(animated: true)
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
