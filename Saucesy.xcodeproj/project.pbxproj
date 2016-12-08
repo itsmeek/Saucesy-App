@@ -16,6 +16,7 @@
 		99E7C2571DF39FD40032A888 /* recipesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C2561DF39FD40032A888 /* recipesVC.swift */; };
 		99E7C2591DF3B91D0032A888 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C2581DF3B91D0032A888 /* Extensions.swift */; };
 		99E7C25B1DF3BAC90032A888 /* recipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C25A1DF3BAC90032A888 /* recipeCell.swift */; };
+		99ED7F461DF89FEF00185BA6 /* recipeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99ED7F451DF89FEF00185BA6 /* recipeDetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		99E7C2561DF39FD40032A888 /* recipesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipesVC.swift; sourceTree = "<group>"; };
 		99E7C2581DF3B91D0032A888 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		99E7C25A1DF3BAC90032A888 /* recipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipeCell.swift; sourceTree = "<group>"; };
+		99ED7F451DF89FEF00185BA6 /* recipeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipeDetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				99E7C2541DF390BD0032A888 /* TabBarController.swift */,
 				99E7C2561DF39FD40032A888 /* recipesVC.swift */,
+				99ED7F451DF89FEF00185BA6 /* recipeDetailVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				99E7C2591DF3B91D0032A888 /* Extensions.swift in Sources */,
 				99E7C2571DF39FD40032A888 /* recipesVC.swift in Sources */,
 				99E7C2441DF38DBB0032A888 /* Saucesy.xcdatamodeld in Sources */,
+				99ED7F461DF89FEF00185BA6 /* recipeDetailVC.swift in Sources */,
 				99E7C2551DF390BD0032A888 /* TabBarController.swift in Sources */,
 				99E7C23C1DF38DBB0032A888 /* AppDelegate.swift in Sources */,
 				99E7C25B1DF3BAC90032A888 /* recipeCell.swift in Sources */,

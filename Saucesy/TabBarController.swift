@@ -35,10 +35,15 @@ class TabBarController: UITabBarController {
         
         //Tint color of selected Item
         self.tabBar.tintColor = UIColor.saucesyRed
+        
+        //removes Background Blur
+        tabBar.isTranslucent = false
+        
 
         //Array of view controllers in tab bar
         viewControllers = [recipesNC, createController(controllerName: "ingredients"), createController(controllerName: "list"), createController(controllerName: "liked")]
     }
+    
     
     private func createController(controllerName: String) -> UINavigationController {
         let viewController = UIViewController()
