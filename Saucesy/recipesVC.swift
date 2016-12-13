@@ -8,7 +8,7 @@
 
 import UIKit
 
-class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout, Dismissing {
+class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let recipeCellId = "recipeCellId"
     
@@ -24,9 +24,7 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout,
         
     }
     
-    func dismiss() {
-        navigationController?.popToRoot(animated: true)
-    }
+
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recipeCellId, for: indexPath)
@@ -50,8 +48,7 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout,
         let recipeDetail = recipeDetailVC(style: .grouped)
         recipeDetail.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(recipeDetail, animated: true)
-//        navigationController?.isNavigationBarHidden = true
-        print("selected")
+        navigationController?.isNavigationBarHidden = true
     }
     
     //Handles phone rotation

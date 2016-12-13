@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol Dismissing {
-    func dismiss()
-}
-
-class recipeDetailVC: UITableViewController {
-
+class recipeDetailVC: UITableViewController, dismissDelegate {
+    
+    var recipeDetailHeader = RecipeDetailHeader()
+    
     private let cellId = "homeDetailcellId"
     private let headerId = "homdeDetailHeadercellId"
+    
+    
 
     //makes style grouped
     override init(style: UITableViewStyle){
@@ -31,14 +31,16 @@ class recipeDetailVC: UITableViewController {
         super.viewDidLoad()
         styleComponents()
         
-        dismissButton()
-        
-        tableView.delegate = self
-        
         tableView.register(ingredientsCell.self, forCellReuseIdentifier: cellId)
-        tableView.register(igredientsCellHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
+        tableView.register(RecipeDetailHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
+        
+        recipeDetailHeader.delegate = self
     }
-
+    
+    func dismissVC() {
+        print("Test")
+    }
+    
 
     // MARK: - Table view data source
 
@@ -53,12 +55,13 @@ class recipeDetailVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        
         return cell
     }
     
     //Section Header
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! RecipeDetailHeader
         return header
     }
     
@@ -70,76 +73,14 @@ class recipeDetailVC: UITableViewController {
         tableView.showsVerticalScrollIndicator = false
     }
     
-    func dismissButton(){
-        let button = UIButton()
-        button.backgroundColor = UIColor.red
-        button.setTitle("Name your Button ", for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        self.view.addSubview(button)
-        
-        self.view.addConstraintsWithFormat(format: "H:|-16-[v0(200)]", views: button)
-        self.view.addConstraintsWithFormat(format: "V:[v0(200)]|", views: button)
-    }
     
-    func buttonAction(sender: UIButton!) {
-        print("Button tapped")
-    }
 
 
-
-//Custom Header
-class igredientsCellHeader: UITableViewHeaderFooterView{
-    
-    var delegate: Dismissing? = nil
-        
-    override init(reuseIdentifier: String?){
-        super.init(reuseIdentifier: reuseIdentifier)
-        setupHeader()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    let headerImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "foodImage")
-        imageView.contentMode = .scaleToFill
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    
-    lazy var closeButton: UIButton = {
-        let button = UIButton()
-        let buttonImage = UIImage(named: "closeIcon")
-        button.setImage(buttonImage, for: .normal)
-        button.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
-        return button
-    }()
-    
-    func dismissVC(){
-        if delegate != nil{
-         self.delegate?.dismiss()
-        }
-//        recipeDetailVC.navigationController?.popToRootViewController(animated: true)
-    }
- 
-    
-    func setupHeader() {
-        addSubview(headerImage)
-        addSubview(closeButton)
-        
-        addConstraintsWithFormat(format: "H:|[v0]|", views: headerImage)
-        addConstraintsWithFormat(format: "V:|[v0(260)]|", views: headerImage)
-        
-        addConstraintsWithFormat(format: "H:|-16-[v0(28)]", views: closeButton)
-        addConstraintsWithFormat(format: "V:|-25-[v0(28)]", views: closeButton)
-        
-    }
+  
 }
 
 
 class ingredientsCell:UITableViewCell{
+    
 }
-}
+
