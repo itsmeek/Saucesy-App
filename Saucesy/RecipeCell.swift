@@ -1,5 +1,5 @@
 //
-//  recipeCell.swift
+//  RecipeCell.swift
 //  Saucesy
 //
 //  Created by Meeky Dekowski on 12/3/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class recipeCell: UICollectionViewCell {
+class RecipeCell: UICollectionViewCell {
     
     //Whenever dequed, cell calls init with frame and here is where we want to override it and add our views
     override init(frame: CGRect){
@@ -156,9 +156,5 @@ class recipeCell: UICollectionViewCell {
         //Like Button Constraints
         addConstraintsWithFormat(format: "H:[v0]-36-|", views: likeButton)
         addConstraintsWithFormat(format: "V:[v0]-14-|", views: likeButton)
-        
-        
-    }
-    
-    
+    } 
 }

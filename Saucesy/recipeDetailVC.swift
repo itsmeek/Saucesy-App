@@ -8,16 +8,13 @@
 
 import UIKit
 
-class recipeDetailVC: UITableViewController, dismissDelegate {
-    
-    var recipeDetailHeader = RecipeDetailHeader()
+class recipeDetailVC: UITableViewController, DismissDelegate {
     
     private let cellId = "homeDetailcellId"
     private let headerId = "homdeDetailHeadercellId"
     
-    
 
-    //makes style grouped
+    //makes table style grouped
     override init(style: UITableViewStyle){
         super.init(style: style)
     }
@@ -27,23 +24,32 @@ class recipeDetailVC: UITableViewController, dismissDelegate {
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
         styleComponents()
         
         tableView.register(ingredientsCell.self, forCellReuseIdentifier: cellId)
         tableView.register(RecipeDetailHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
-        
-        recipeDetailHeader.delegate = self
+    }
+    
+    //Hides status bar of the whole apllication
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        UIApplication.shared.isStatusBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        UIApplication.shared.isStatusBarHidden = false
     }
     
     func dismissVC() {
-        print("Test")
+        navigationController?.pop(animated: true)
     }
     
 
-    // MARK: - Table view data source
-
+    //Tableview
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
@@ -62,6 +68,11 @@ class recipeDetailVC: UITableViewController, dismissDelegate {
     //Section Header
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! RecipeDetailHeader
+        
+        header.contentView.backgroundColor = .white
+        
+        header.delegate = self
+    
         return header
     }
     
@@ -72,11 +83,6 @@ class recipeDetailVC: UITableViewController, dismissDelegate {
     func styleComponents(){
         tableView.showsVerticalScrollIndicator = false
     }
-    
-    
-
-
-  
 }
 
 

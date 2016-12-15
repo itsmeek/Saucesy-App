@@ -1,5 +1,5 @@
 //
-//  recipesVC.swift
+//  RecipesVC.swift
 //  Saucesy
 //
 //  Created by Meeky Dekowski on 12/3/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     private let recipeCellId = "recipeCellId"
     
@@ -20,12 +20,11 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         setupNavBar()
         
         //Programatically sets the reuse identifier
-        collectionView?.register(recipeCell.self, forCellWithReuseIdentifier: recipeCellId)
+        collectionView?.register(RecipeCell.self, forCellWithReuseIdentifier: recipeCellId)
         
     }
     
-
-    
+    //Collection View
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recipeCellId, for: indexPath)
         
@@ -33,7 +32,7 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 13
+        return 10
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -57,15 +56,16 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         collectionView?.collectionViewLayout.invalidateLayout()
     }
     
-//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-//            setTabBarVisible(visible: false, animated: true)
-//        }else{
-//            setTabBarVisible(visible: true, animated: true)
-//        }
-//    }
+    //Hides tab bar when scrolling down
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+            setTabBarVisible(visible: false, animated: true)
+        }else{
+            setTabBarVisible(visible: true, animated: true)
+        }
+    }
     
-    //Filter tab bar
+    //Adds filter icon to tab bar
     func setupNavBar(){
         let filterNavIcon = UIImage(named: "filterNavIcon")?.withRenderingMode(.alwaysOriginal)
         let filterBarIcon = UIBarButtonItem(image: filterNavIcon, style: .plain, target: self, action: #selector(handleFilter))
@@ -77,17 +77,17 @@ class recipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     }
     
     func styleComponents(){
-        
         //Changes the title text "Saucesy" to logo
         let logo = UIImage(named: "logo")
         navigationItem.titleView = UIImageView(image: logo)
         
-        //Sets status bar to white. Must go to info.plist and set the "View controller-based status bar appearance" to NO
+        //Makes navigation bar no see through
         navigationController?.navigationBar.isTranslucent = false
         
         collectionView?.backgroundColor = UIColor(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0)
         
         collectionView?.showsVerticalScrollIndicator = false
+        
     }
 }
 
