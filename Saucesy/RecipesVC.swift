@@ -26,7 +26,7 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     
     //Collection View
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recipeCellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recipeCellId, for: indexPath) as! RecipeCell
         
         return cell
     }
