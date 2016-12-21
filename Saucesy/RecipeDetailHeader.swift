@@ -13,30 +13,53 @@ protocol DismissDelegate {
 }
 
 //Custom Header
-class RecipeDetailHeader: UITableViewHeaderFooterView{
+class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    var cellClass = AllergiesCell()
+    
+    private let cellId = "allergyCellId"
     
     var delegate: DismissDelegate? = nil
     
-    let allergyContainment: Array<String> = ["Vegetarian", "Egg-Free", "Peanut-Free", "Tree-Nut-Free"]
-    
-    var stackButton = [UIView]()
-    
-    
+    let allergies = ["Honey", "Peanut", "Candy", "tic-tacfghcfc", "oil", "Peanut Butter Soup", "Ham", "Cereal", "Vitamin-C"]
     
     override init(reuseIdentifier: String?){
         super.init(reuseIdentifier: reuseIdentifier)
-        
-        addAllergyContainment()
-
         setupHeader()
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return allergies.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AllergiesCell
+        cell.contentView.backgroundColor = UIColor.saucesyBlue
+        cell.configureCell(name: allergies[indexPath.item])
+        cell.contentView.layer.cornerRadius = 22 / 2
+        cell.contentView.layer.masksToBounds = true
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = (allergies[indexPath.item]).size(attributes: nil).width
+        print(collectionView.frame.size.height - 30)
+        return CGSize(width: width + 30, height: collectionView.frame.size.height - 30)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(0, 20, 0, 20)
+    }
     
     let headerImage: UIImageView = {
         let imageView = UIImageView()
@@ -94,7 +117,17 @@ class RecipeDetailHeader: UITableViewHeaderFooterView{
         return label
     }()
     
-   
+    let allergiesCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false;
+        return collectionView
+    }()
+    
+    
     
     lazy var recipeHeaderCloseButton: UIButton = {
         let button = UIButton()
@@ -108,42 +141,17 @@ class RecipeDetailHeader: UITableViewHeaderFooterView{
         delegate?.dismissVC()
     }
     
-    func addAllergyContainment(){
-        
-        for x in 0..<allergyContainment.count{
-            let button = UIButton()
-            
-//            var newX: CGFloat = 0.0
-        
-            button.setTitle("   \(allergyContainment[x])   ", for: .normal)
-            button.backgroundColor = UIColor.saucesyBlue
-            button.titleLabel?.font = UIFont(name: "Avenir", size: 13.0)
-            button.sizeToFit()
-            var buttonWidth = button.frame.size.width
-            var buttonHeight = button.frame.size.height
-            button.layer.cornerRadius = buttonHeight / 2
-            buttonWidth += 20
-            buttonHeight -= 8
-            
-            print(buttonHeight)
-            
-            stackButton.append(button)
-            
-//            self.addSubview(button)
-//            
-//            var newX = button.frame.width * CGFloat(x)
-            
-//            print("Button width is \(button.frame.width) and new x is \(newX)")
-            
-//            button.frame.origin = CGPoint(x: newX, y: 0)
-
-
-            
-        }
-    }
+    
     func setupHeader() {
         addSubview(headerImage)
         addSubview(recipeHeaderCloseButton)
+        addSubview(allergiesCollectionView)
+        
+        
+        allergiesCollectionView.delegate = self
+        allergiesCollectionView.dataSource = self
+        
+        allergiesCollectionView.register(AllergiesCell.self, forCellWithReuseIdentifier: cellId)
         
         //Stackview for recipeCalories and recipeServings ([recipeHeaderCalories][recipeHeaderServings])
         let recipeInfoStackView = UIStackView(arrangedSubviews: [recipeHeaderCalories, recipeHeaderServings])
@@ -162,14 +170,6 @@ class RecipeDetailHeader: UITableViewHeaderFooterView{
         recipeDetailStackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(recipeDetailStackView)
         
-        let allergiesStackView = UIStackView(arrangedSubviews: stackButton)
-        allergiesStackView.axis = .horizontal
-        allergiesStackView.distribution = .fill
-        allergiesStackView.alignment = .leading
-        allergiesStackView.spacing = 8
-        allergiesStackView.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(allergiesStackView)
-        
         addConstraintsWithFormat(format: "H:|[v0]|", views: headerImage)
         addConstraintsWithFormat(format: "V:|[v0(260)]-15-[v1]", views: headerImage, recipeDetailStackView)
         
@@ -177,12 +177,11 @@ class RecipeDetailHeader: UITableViewHeaderFooterView{
         addConstraintsWithFormat(format: "V:|-1-[v0(36)]", views: recipeHeaderCloseButton)
         
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: recipeDetailStackView)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: allergiesStackView)
         
-        addConstraint(NSLayoutConstraint(item: allergiesStackView, attribute: .bottom, relatedBy: .equal, toItem: headerImage, attribute: .bottom, multiplier: 1, constant: -8))
-//        addConstraint(NSLayoutConstraint(item: allergiesStackView, attribute: .left, relatedBy: .equal, toItem: headerImage, attribute: .left, multiplier: 1, constant: 0))
-//        addConstraint(NSLayoutConstraint(item: allergiesStackView, attribute: .right, relatedBy: .equal, toItem: headerImage, attribute: .right, multiplier: 1, constant: 0))
-//        addConstraint(NSLayoutConstraint(item: allergiesStackView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 33))
+        addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .right, relatedBy: .equal, toItem: headerImage, attribute: .right, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .left, relatedBy: .equal, toItem: headerImage, attribute: .left, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .bottom, relatedBy: .equal, toItem: headerImage, attribute: .bottom, multiplier: 1, constant: 4))
+        addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 52))
         
     }
 }
