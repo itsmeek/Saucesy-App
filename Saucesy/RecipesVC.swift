@@ -23,6 +23,7 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         setupNavBar()
         
+        
         //Programatically sets the reuse identifier
         collectionView?.register(RecipeCell.self, forCellWithReuseIdentifier: recipeCellId)
         
@@ -31,6 +32,8 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     //Collection View
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recipeCellId, for: indexPath) as! RecipeCell
+        
+        cell.recipe = recipes?[indexPath.row]
         
         return cell
     }

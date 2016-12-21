@@ -20,6 +20,12 @@ class RecipeCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    var recipe: Recipe? {
+        didSet{
+            recipeName.text = recipe?.name
+        }
+    }
+    
     let recipeImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "foodImage")
