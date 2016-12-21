@@ -10,12 +10,16 @@ import UIKit
 
 class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    var recipes: [Recipe]?
+    
     private let recipeCellId = "recipeCellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         styleComponents()
+        
+        downloadRecipe()
         
         setupNavBar()
         
@@ -32,19 +36,17 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        //return count otherwise return 0
+        return recipes?.count ?? 0
     }
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 362.0)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let recipeDetail = recipeDetailVC(style: .grouped)
+        let recipeDetail = RecipeDetailVC()
         recipeDetail.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(recipeDetail, animated: true)
         navigationController?.isNavigationBarHidden = true
@@ -87,7 +89,6 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         collectionView?.backgroundColor = UIColor(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0)
         
         collectionView?.showsVerticalScrollIndicator = false
-        
     }
 }
 

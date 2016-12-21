@@ -18,8 +18,6 @@ class AllergiesCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    
     let dietLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -32,14 +30,12 @@ class AllergiesCell: UICollectionViewCell {
         dietLabel.text = name
     }
     
-    
     func setupViews(){
         addSubview(dietLabel)
         
-        
         addConstraintsWithFormat(format: "H:|[v0]|", views: dietLabel)
         addConstraintsWithFormat(format: "V:|[v0]|", views: dietLabel)
-
+        
     }
 }
 

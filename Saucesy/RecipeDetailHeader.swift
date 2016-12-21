@@ -16,6 +16,7 @@ protocol DismissDelegate {
 class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     var cellClass = AllergiesCell()
+    
     private let cellId = "allergyCellId"
     
     var delegate: DismissDelegate? = nil
@@ -39,7 +40,7 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AllergiesCell
         cell.contentView.backgroundColor = UIColor.saucesyBlue
         cell.configureCell(name: allergies[indexPath.item])
-        cell.contentView.layer.cornerRadius = collectionView.frame.height / 2
+        cell.contentView.layer.cornerRadius = 22 / 2
         cell.contentView.layer.masksToBounds = true
         return cell
     }
@@ -47,8 +48,8 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = (allergies[indexPath.item]).size(attributes: nil).width
-        print(width)
-        return CGSize(width: width + 30, height: collectionView.frame.size.height)
+        print(collectionView.frame.size.height - 30)
+        return CGSize(width: width + 30, height: collectionView.frame.size.height - 30)
         
     }
     
@@ -126,7 +127,7 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
         return collectionView
     }()
     
-   
+    
     
     lazy var recipeHeaderCloseButton: UIButton = {
         let button = UIButton()
@@ -146,7 +147,7 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
         addSubview(recipeHeaderCloseButton)
         addSubview(allergiesCollectionView)
         
-
+        
         allergiesCollectionView.delegate = self
         allergiesCollectionView.dataSource = self
         
@@ -179,9 +180,8 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
         
         addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .right, relatedBy: .equal, toItem: headerImage, attribute: .right, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .left, relatedBy: .equal, toItem: headerImage, attribute: .left, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .bottom, relatedBy: .equal, toItem: headerImage, attribute: .bottom, multiplier: 1, constant: -8))
-        addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 22))
-    
+        addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .bottom, relatedBy: .equal, toItem: headerImage, attribute: .bottom, multiplier: 1, constant: 4))
+        addConstraint(NSLayoutConstraint(item: allergiesCollectionView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 52))
         
     }
 }
