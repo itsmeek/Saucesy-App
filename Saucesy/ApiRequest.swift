@@ -10,7 +10,7 @@ import UIKit
 
 var listOfRecipies: [Recipe]?
 
-let Increment = 50
+let Increment = 5
 
 func downloadRecipe(completionHandler: @escaping DownloadComplete){
     
@@ -64,7 +64,13 @@ func downloadRecipe(completionHandler: @escaping DownloadComplete){
 
 var offset = Increment
 
+var reachedEndOfItems = false
+
 func downloadMore(completionHandler: @escaping DownloadComplete){
+    
+    guard !reachedEndOfItems else{
+        return
+    }
     
     typealias jsonStandard = Dictionary<String,AnyObject>
     
@@ -112,6 +118,11 @@ func downloadMore(completionHandler: @escaping DownloadComplete){
                     offset += Increment
 
                     print("TO \(offset)")
+                    
+                    if offset > (listOfRecipies?.count)!{
+                        print("OFFSET \(offset) PASSES LIMIT \(listOfRecipies?.count)")
+                        reachedEndOfItems = true
+                    }
 
                     //safely unwrap
                     completionHandler(listOfRecipies!)

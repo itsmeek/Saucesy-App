@@ -43,21 +43,7 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         if indexPath.row == (recipies?.count)! - 1{
             downloadMore(completionHandler: { (newRecipies) in
-                
-//                for element in newRecipies{
-//                    print(element.name)
-//                }
-                
-               
                 self.recipies = newRecipies
-                
-//                for element2 in self.recipies!{
-//                    
-//                    print("DATA: \(element2.name)")
-//                }
-                
-//                print("COUNT:  \(self.recipies?.count)")
-//                self.recipies?.append(contentsOf: newRecipies)
                 self.collectionView?.reloadData()
             })
         }
