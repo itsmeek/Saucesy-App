@@ -10,7 +10,7 @@
 		9905ED811DFF15F000A3B066 /* RecipeDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9905ED801DFF15F000A3B066 /* RecipeDetailHeader.swift */; };
 		99515B8B1E06FBA0002FEB1F /* IngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99515B8A1E06FBA0002FEB1F /* IngredientsCell.swift */; };
 		996273001E024D18007B8C6F /* AllergiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996272FF1E024D18007B8C6F /* AllergiesCell.swift */; };
-		998F96AC1E0B2A3E00979DE1 /* DownloadRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998F96AB1E0B2A3E00979DE1 /* DownloadRecipe.swift */; };
+		998F96AE1E0BF27300979DE1 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998F96AD1E0BF27300979DE1 /* ApiRequest.swift */; };
 		99E7C23C1DF38DBB0032A888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */; };
 		99E7C2411DF38DBB0032A888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99E7C23F1DF38DBB0032A888 /* Main.storyboard */; };
 		99E7C2441DF38DBB0032A888 /* Saucesy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C2421DF38DBB0032A888 /* Saucesy.xcdatamodeld */; };
@@ -29,7 +29,7 @@
 		9905ED801DFF15F000A3B066 /* RecipeDetailHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailHeader.swift; sourceTree = "<group>"; };
 		99515B8A1E06FBA0002FEB1F /* IngredientsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsCell.swift; sourceTree = "<group>"; };
 		996272FF1E024D18007B8C6F /* AllergiesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesCell.swift; sourceTree = "<group>"; };
-		998F96AB1E0B2A3E00979DE1 /* DownloadRecipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadRecipe.swift; sourceTree = "<group>"; };
+		998F96AD1E0BF27300979DE1 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		99E7C2381DF38DBB0032A888 /* Saucesy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saucesy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99E7C2401DF38DBB0032A888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				99F8671C1E08C68D00DA3CD7 /* Recipe.swift */,
-				998F96AB1E0B2A3E00979DE1 /* DownloadRecipe.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -129,8 +128,8 @@
 		99E7C2521DF38F870032A888 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				99ED7F451DF89FEF00185BA6 /* RecipeDetailVC.swift */,
 				99E7C2561DF39FD40032A888 /* RecipesVC.swift */,
+				99ED7F451DF89FEF00185BA6 /* RecipeDetailVC.swift */,
 				99E7C2541DF390BD0032A888 /* TabBarController.swift */,
 			);
 			name = Controller;
@@ -140,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				99E7C2581DF3B91D0032A888 /* Extensions.swift */,
+				998F96AD1E0BF27300979DE1 /* ApiRequest.swift */,
 				99F8671E1E08D84200DA3CD7 /* Constants.swift */,
 			);
 			name = Utilities;
@@ -218,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				998F96AE1E0BF27300979DE1 /* ApiRequest.swift in Sources */,
 				996273001E024D18007B8C6F /* AllergiesCell.swift in Sources */,
 				99E7C2591DF3B91D0032A888 /* Extensions.swift in Sources */,
 				99E7C2571DF39FD40032A888 /* RecipesVC.swift in Sources */,
@@ -227,7 +228,6 @@
 				99E7C2551DF390BD0032A888 /* TabBarController.swift in Sources */,
 				99E7C23C1DF38DBB0032A888 /* AppDelegate.swift in Sources */,
 				99E7C25B1DF3BAC90032A888 /* RecipeCell.swift in Sources */,
-				998F96AC1E0B2A3E00979DE1 /* DownloadRecipe.swift in Sources */,
 				9905ED811DFF15F000A3B066 /* RecipeDetailHeader.swift in Sources */,
 				99F8671D1E08C68D00DA3CD7 /* Recipe.swift in Sources */,
 				99F8671F1E08D84200DA3CD7 /* Constants.swift in Sources */,

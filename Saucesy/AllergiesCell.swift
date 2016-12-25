@@ -35,7 +35,6 @@ class AllergiesCell: UICollectionViewCell {
         
         addConstraintsWithFormat(format: "H:|[v0]|", views: dietLabel)
         addConstraintsWithFormat(format: "V:|[v0]|", views: dietLabel)
-        
     }
 }
 

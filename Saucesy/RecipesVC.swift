@@ -10,7 +10,7 @@ import UIKit
 
 class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var recipes: [Recipe]?
+    var recipies: [Recipe]?
     
     private let recipeCellId = "recipeCellId"
     
@@ -19,7 +19,10 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         styleComponents()
         
-        downloadRecipe()
+        downloadRecipe { (recipies) in
+            self.recipies = recipies
+            self.collectionView?.reloadData()
+        }
         
         setupNavBar()
         
@@ -33,14 +36,40 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recipeCellId, for: indexPath) as! RecipeCell
         
-        cell.recipe = recipes?[indexPath.row]
+        if let recipe = recipies?[indexPath.item]{
+            cell.recipe = recipe
+        }
+        
+        
+        if indexPath.row == (recipies?.count)! - 1{
+            downloadMore(completionHandler: { (newRecipies) in
+                
+//                for element in newRecipies{
+//                    print(element.name)
+//                }
+                
+               
+                self.recipies = newRecipies
+                
+//                for element2 in self.recipies!{
+//                    
+//                    print("DATA: \(element2.name)")
+//                }
+                
+//                print("COUNT:  \(self.recipies?.count)")
+//                self.recipies?.append(contentsOf: newRecipies)
+                self.collectionView?.reloadData()
+            })
+        }
         
         return cell
     }
     
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //return count otherwise return 0
-        return recipes?.count ?? 0
+        return recipies?.count ?? 0
     }
     
     
@@ -78,8 +107,9 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     }
     
     func handleFilter(){
-        print("124")
+//        print("124")
     }
+    
     
     func styleComponents(){
         //Changes the title text "Saucesy" to logo
@@ -91,7 +121,7 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         collectionView?.backgroundColor = UIColor(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0)
         
-        collectionView?.showsVerticalScrollIndicator = false
+//        collectionView?.showsVerticalScrollIndicator = false
     }
 }
 

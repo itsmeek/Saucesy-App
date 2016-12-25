@@ -72,8 +72,6 @@ extension UIViewController {
         let height = frame?.size.height
         let offsetY = (visible ? -height! : height)
         
-        print(offsetY)
-        
         // zero duration means no animation
         let duration: TimeInterval = (animated ? 0.3 : 0.0)
         

@@ -17,3 +17,8 @@ import Foundation
 //let SEARCH_QUERY_VALUE = "chicken"
 //
 //let RECIPE_URL = "\(URL_BASE)\(APP_ID)\(APP_ID_VALUE)\(APP_KEY)\(APP_KEY_VALUE)\(SEARCH_QUERY)\(SEARCH_QUERY_VALUE)"
+
+
+typealias DownloadComplete = ([Recipe]) -> ()
+
+typealias Complete = () -> ()

@@ -13,7 +13,9 @@ class RecipeCell: UICollectionViewCell {
     //Whenever dequed, cell calls init with frame and here is where we want to override it and add our views
     override init(frame: CGRect){
         super.init(frame: frame)
+        
         setupViews()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -22,7 +24,43 @@ class RecipeCell: UICollectionViewCell {
     
     var recipe: Recipe? {
         didSet{
+            //Sets Recipe name
             recipeName.text = recipe?.name
+            
+            //Sets Recipe description
+            recipeDescription.text = recipe?.ingredients.joined(separator: " • ")
+            
+            //Sets Recipe calories
+            setAttributedText(on: recipeCalories)
+            
+            //Sets Recipe servings
+            setAttributedText(on: recipeServings)
+        }
+    }
+    
+    func setAttributedText(on: UILabel){
+        if on == recipeCalories{
+            if let response = recipe?.calories{
+                let caloriesLabel = "\(response) CALORIES"
+                let caloriesText = "\(response)"
+                on.textColor = UIColor.saucesyBlue
+                
+                let range = (caloriesLabel as NSString).range(of: caloriesText)
+                let attributedString = NSMutableAttributedString(string: caloriesLabel)
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.saucesyRed , range: range)
+                on.attributedText = attributedString
+            }
+        } else {
+            if let response = recipe?.servings{
+                let caloriesLabel = "\(response) SERVINGS"
+                let caloriesText = "\(response)"
+                on.textColor = UIColor.saucesyBlue
+                
+                let range = (caloriesLabel as NSString).range(of: caloriesText)
+                let attributedString = NSMutableAttributedString(string: caloriesLabel)
+                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.saucesyRed , range: range)
+                on.attributedText = attributedString
+            }
         }
     }
     
@@ -47,8 +85,6 @@ class RecipeCell: UICollectionViewCell {
     
     let recipeDescription: UITextView = {
         let textView = UITextView()
-        var recipeDescriptionText = "1 can (29 oz) pumpkin puree, 1 cup brown sugar, ¾ cup water, 1 tsp. vanilla extract, 1 tsp. cinnamon, 1 tsp. ground ginger, 1 cup brown sugar "
-        textView.text = recipeDescriptionText
         textView.textColor = UIColor.saucesyLightBlue
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isUserInteractionEnabled = false
@@ -63,37 +99,15 @@ class RecipeCell: UICollectionViewCell {
     
     let recipeCalories: UILabel = {
         let label = UILabel()
-        let calories = "2360"
-        let caloriesText = "CALORIES"
-        let caloriesLabel = "\(calories) \(caloriesText)"
-        label.textColor = UIColor.saucesyRed
         label.font = UIFont(name: "Avenir", size: 13.0)
         label.font = UIFont.systemFont(ofSize: 13.0, weight: UIFontWeightMedium)
-        
-        //Api request number (changing color)
-        let range = (caloriesLabel as NSString).range(of: caloriesText)
-        let attributedString = NSMutableAttributedString(string: caloriesLabel)
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.saucesyBlue , range: range)
-        label.attributedText = attributedString
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let recipeServings: UILabel = {
         let label = UILabel()
-        let servings = "5"
-        let servingsText = "SERVINGS"
-        let servingsLabel = "\(servings) \(servingsText)"
-        label.textColor = UIColor.saucesyRed
         label.font = UIFont(name: "Avenir", size: 13.0)
         label.font = UIFont.systemFont(ofSize: 13.0, weight: UIFontWeightMedium)
-        
-        //Api request number (changing color)
-        let range = (servingsLabel as NSString).range(of: servingsText)
-        let attributedString = NSMutableAttributedString(string: servingsLabel)
-        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.saucesyBlue , range: range)
-        label.attributedText = attributedString
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -162,5 +176,5 @@ class RecipeCell: UICollectionViewCell {
         //Like Button Constraints
         addConstraintsWithFormat(format: "H:[v0]-36-|", views: likeButton)
         addConstraintsWithFormat(format: "V:[v0]-14-|", views: likeButton)
-    } 
+    }
 }
