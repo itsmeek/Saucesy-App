@@ -40,7 +40,6 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
             cell.recipe = recipe
         }
         
-        
         if indexPath.row == (recipies?.count)! - 1{
             downloadMore(completionHandler: { (newRecipies) in
                 self.recipies = newRecipies

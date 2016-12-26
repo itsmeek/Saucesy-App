@@ -24,6 +24,9 @@ class RecipeCell: UICollectionViewCell {
     
     var recipe: Recipe? {
         didSet{
+            
+            setupRecipeImage()
+            
             //Sets Recipe name
             recipeName.text = recipe?.name
             
@@ -122,6 +125,27 @@ class RecipeCell: UICollectionViewCell {
     func handleLikes(){
         let buttonFilled: UIImage = UIImage(named: "likedBarItemFilled")!
         likeButton.setImage(buttonFilled, for: .normal)
+    }
+    
+    func setupRecipeImage(){
+        if let recipePhotoUrl = recipe?.image{
+            
+            let url = URL(string: recipePhotoUrl)!
+            
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                if error != nil{
+                    print(error)
+                    return
+                }
+                DispatchQueue.main.async(execute: {
+                    
+//                    let imageToCache = UIImage(data: data!)
+                    
+                    self.recipeImage.image = UIImage(data: data!)
+                })
+                
+            }).resume()
+        }
     }
     
     func setupViews(){

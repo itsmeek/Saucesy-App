@@ -20,5 +20,3 @@ import Foundation
 
 
 typealias DownloadComplete = ([Recipe]) -> ()
-
-typealias Complete = () -> ()

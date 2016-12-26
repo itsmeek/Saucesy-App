@@ -12,12 +12,14 @@ var listOfRecipies: [Recipe]?
 
 let Increment = 5
 
+let query = "s"
+
 func downloadRecipe(completionHandler: @escaping DownloadComplete){
     
     typealias jsonStandard = Dictionary<String,AnyObject>
     
     //if let this
-    let url = URL(string: "https://api.edamam.com/search?q=turkey&app_id=6a18017d&app_key=56b29c7fe0addda91493a8cb0f9d0e73&from=0&to=\(Increment)")
+    let url = URL(string: "https://api.edamam.com/search?q=\(query)&app_id=6a18017d&app_key=56b29c7fe0addda91493a8cb0f9d0e73&from=0&to=\(Increment)")
     
     let urlRequest = URLRequest(url: url!)
     
@@ -77,13 +79,13 @@ func downloadMore(completionHandler: @escaping DownloadComplete){
     let itemsPerBatch = offset + Increment
     
     //if let this
-    let url = URL(string: "https://api.edamam.com/search?q=turkey&app_id=6a18017d&app_key=56b29c7fe0addda91493a8cb0f9d0e73&from=\(offset)&to=\(itemsPerBatch)")
+    let url = URL(string: "https://api.edamam.com/search?q=\(query)&app_id=6a18017d&app_key=56b29c7fe0addda91493a8cb0f9d0e73&from=\(offset)&to=\(itemsPerBatch)")
     
     let urlRequest = URLRequest(url: url!)
     
     URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
         if error != nil{
-            print("FIRST ERROR \(error?.localizedDescription)")
+            print(error)
             return
         }
         
@@ -123,6 +125,7 @@ func downloadMore(completionHandler: @escaping DownloadComplete){
                         print("OFFSET \(offset) PASSES LIMIT \(listOfRecipies?.count)")
                         reachedEndOfItems = true
                     }
+    
 
                     //safely unwrap
                     completionHandler(listOfRecipies!)
@@ -135,3 +138,6 @@ func downloadMore(completionHandler: @escaping DownloadComplete){
         }
         }.resume()
 }
+
+
+

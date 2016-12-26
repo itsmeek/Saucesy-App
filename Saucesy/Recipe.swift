@@ -21,7 +21,7 @@ class Recipe{
         if _image == nil{
             _image = ""
         }
-        return _name
+        return _image
     }
     
     var name: String {
