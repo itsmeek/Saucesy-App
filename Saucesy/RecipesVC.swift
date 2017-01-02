@@ -25,11 +25,13 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         }
         
         setupNavBar()
-        
+        setupMenuBar()
         
         //Programatically sets the reuse identifier
         collectionView?.register(RecipeCell.self, forCellWithReuseIdentifier: recipeCellId)
         
+        collectionView?.contentInset = UIEdgeInsetsMake(38, 0, 0, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(38, 0, 0, 0)
     }
     
     //Collection View
@@ -46,19 +48,16 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
                 self.collectionView?.reloadData()
             })
         }
-        
         return cell
     }
-    
-    
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         //return count otherwise return 0
         return recipies?.count ?? 0
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         return CGSize(width: view.frame.width, height: 362.0)
     }
     
@@ -97,16 +96,31 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     
     
     func styleComponents(){
-        //Changes the title text "Saucesy" to logo
-        let logo = UIImage(named: "logo")
-        navigationItem.titleView = UIImageView(image: logo)
+        //Changes the title text Featured
+        navigationItem.title = "Featured"
+        
+        if let nav = self.navigationController?.navigationBar{
+            nav.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 17)!]
+        }
         
         //Makes navigation bar no see through
         navigationController?.navigationBar.isTranslucent = false
         
         collectionView?.backgroundColor = UIColor(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0)
         
-//        collectionView?.showsVerticalScrollIndicator = false
+    }
+    
+    let menubar: MenuBar = {
+        let mb = MenuBar()
+        return mb
+    }()
+    
+    //private because no other class should have access
+    fileprivate func setupMenuBar(){
+        view.addSubview(menubar)
+        
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menubar)
+        view.addConstraintsWithFormat(format: "V:|[v0(38)]", views: menubar)
     }
 }
 

@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		9905ED811DFF15F000A3B066 /* RecipeDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9905ED801DFF15F000A3B066 /* RecipeDetailHeader.swift */; };
+		991E184E1E149C790027403E /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E184D1E149C790027403E /* MenuBar.swift */; };
+		991E18501E14A6990027403E /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E184F1E14A6990027403E /* BaseCell.swift */; };
 		99515B8B1E06FBA0002FEB1F /* IngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99515B8A1E06FBA0002FEB1F /* IngredientsCell.swift */; };
 		996273001E024D18007B8C6F /* AllergiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996272FF1E024D18007B8C6F /* AllergiesCell.swift */; };
+		9987959A1E1998B800EC6AF0 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998795991E1998B800EC6AF0 /* MenuCell.swift */; };
 		998F96AE1E0BF27300979DE1 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998F96AD1E0BF27300979DE1 /* ApiRequest.swift */; };
 		99E7C23C1DF38DBB0032A888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */; };
 		99E7C2411DF38DBB0032A888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99E7C23F1DF38DBB0032A888 /* Main.storyboard */; };
@@ -27,8 +30,11 @@
 
 /* Begin PBXFileReference section */
 		9905ED801DFF15F000A3B066 /* RecipeDetailHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailHeader.swift; sourceTree = "<group>"; };
+		991E184D1E149C790027403E /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		991E184F1E14A6990027403E /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		99515B8A1E06FBA0002FEB1F /* IngredientsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsCell.swift; sourceTree = "<group>"; };
 		996272FF1E024D18007B8C6F /* AllergiesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesCell.swift; sourceTree = "<group>"; };
+		998795991E1998B800EC6AF0 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		998F96AD1E0BF27300979DE1 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		99E7C2381DF38DBB0032A888 /* Saucesy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saucesy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				99E7C25A1DF3BAC90032A888 /* RecipeCell.swift */,
+				998795981E19985200EC6AF0 /* Menu */,
 			);
 			name = Recipes;
 			sourceTree = "<group>";
@@ -73,6 +80,15 @@
 				99515B8A1E06FBA0002FEB1F /* IngredientsCell.swift */,
 			);
 			name = "Recipe Details";
+			sourceTree = "<group>";
+		};
+		998795981E19985200EC6AF0 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				991E184D1E149C790027403E /* MenuBar.swift */,
+				998795991E1998B800EC6AF0 /* MenuCell.swift */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		99E7C22F1DF38DBB0032A888 = {
@@ -141,6 +157,7 @@
 				99E7C2581DF3B91D0032A888 /* Extensions.swift */,
 				998F96AD1E0BF27300979DE1 /* ApiRequest.swift */,
 				99F8671E1E08D84200DA3CD7 /* Constants.swift */,
+				991E184F1E14A6990027403E /* BaseCell.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -230,6 +247,9 @@
 				99E7C25B1DF3BAC90032A888 /* RecipeCell.swift in Sources */,
 				9905ED811DFF15F000A3B066 /* RecipeDetailHeader.swift in Sources */,
 				99F8671D1E08C68D00DA3CD7 /* Recipe.swift in Sources */,
+				991E184E1E149C790027403E /* MenuBar.swift in Sources */,
+				991E18501E14A6990027403E /* BaseCell.swift in Sources */,
+				9987959A1E1998B800EC6AF0 /* MenuCell.swift in Sources */,
 				99F8671F1E08D84200DA3CD7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

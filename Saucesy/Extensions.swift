@@ -98,7 +98,6 @@ extension UINavigationController {
     }
 }
 
-
 extension UIViewController {
     func alert(message: String, title: String = ""){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -107,5 +106,46 @@ extension UIViewController {
             self.present(alertController, animated: true, completion: nil)
     }
 }
+
+let imageCache = NSCache<NSString, UIImage>()
+
+class CustomImageView: UIImageView {
     
+    var imageUrlString: String?
+    
+    func loadImageUsingUrlString(urlString: String){
+        
+        imageUrlString = urlString
+        
+        let url = URL(string: urlString)!
+        
+        image = nil
+        
+        if let imageFromCache = imageCache.object(forKey: urlString as NSString){
+            self.image = imageFromCache
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            if error != nil{
+                print(error)
+                return
+            }
+            DispatchQueue.main.async(execute: {
+                
+                let imageToCache = UIImage(data: data!)
+                
+                if self.imageUrlString == urlString{
+                    self.image = imageToCache
+                }
+                //Store inside image cache
+                imageCache.setObject(imageToCache!, forKey: urlString as NSString)
+                
+                
+            })
+            
+        }).resume()
+    }
+}
+
 

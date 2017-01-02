@@ -15,7 +15,6 @@ class RecipeCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupViews()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,8 +66,8 @@ class RecipeCell: UICollectionViewCell {
         }
     }
     
-    let recipeImage: UIImageView = {
-        let imageView = UIImageView()
+    let recipeImage: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.image = UIImage(named: "foodImage")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -80,8 +79,7 @@ class RecipeCell: UICollectionViewCell {
         let recipeNameText = "Salsa Verde Chicken Bake"
         label.text = recipeNameText
         label.textColor = UIColor.saucesyBlue
-        label.font = UIFont(name: "Avenir", size: 18.0)
-        label.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightMedium)
+        label.font = UIFont(name: "Avenir-Medium", size: 18.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -91,7 +89,6 @@ class RecipeCell: UICollectionViewCell {
         textView.textColor = UIColor.saucesyLightBlue
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.isUserInteractionEnabled = false
-        textView.textAlignment = NSTextAlignment.left
         textView.font = UIFont(name: "Avenir", size: 14.0)
         textView.textContainer.lineFragmentPadding = 0
         textView.textContainerInset = UIEdgeInsets.zero
@@ -129,22 +126,8 @@ class RecipeCell: UICollectionViewCell {
     
     func setupRecipeImage(){
         if let recipePhotoUrl = recipe?.image{
-            
-            let url = URL(string: recipePhotoUrl)!
-            
-            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-                if error != nil{
-                    print(error)
-                    return
-                }
-                DispatchQueue.main.async(execute: {
-                    
-//                    let imageToCache = UIImage(data: data!)
-                    
-                    self.recipeImage.image = UIImage(data: data!)
-                })
-                
-            }).resume()
+            recipeImage.loadImageUsingUrlString(urlString: recipePhotoUrl)
+            print(recipePhotoUrl)
         }
     }
     
@@ -165,7 +148,7 @@ class RecipeCell: UICollectionViewCell {
         addConstraint(NSLayoutConstraint(item: recipeName, attribute: .top, relatedBy: .equal, toItem: recipeImage, attribute: .bottom, multiplier: 1, constant: 16))
         addConstraint(NSLayoutConstraint(item: recipeName, attribute: .left, relatedBy: .equal, toItem: recipeImage, attribute: .left, multiplier: 1, constant: 20))
         addConstraint(NSLayoutConstraint(item: recipeName, attribute: .right, relatedBy: .equal, toItem: recipeImage, attribute: .right, multiplier: 1, constant: -20))
-        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .height, relatedBy: .equal, toItem: self , attribute: .height, multiplier: 0, constant: 18))
+        addConstraint(NSLayoutConstraint(item: recipeName, attribute: .height, relatedBy: .equal, toItem: self , attribute: .height, multiplier: 0, constant: 22))
         
         
         //Stackview for recipeCalories and recipeServings ([calories][servings])

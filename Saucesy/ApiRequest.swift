@@ -10,9 +10,9 @@ import UIKit
 
 var listOfRecipies: [Recipe]?
 
-let Increment = 5
+let Increment = 100
 
-let query = "s"
+let query = "pasta"
 
 func downloadRecipe(completionHandler: @escaping DownloadComplete){
     
