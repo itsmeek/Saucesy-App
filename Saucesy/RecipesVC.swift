@@ -90,8 +90,11 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         navigationItem.rightBarButtonItem = filterBarIcon
     }
     
+    //Solves fat view controller when you have too nuch code in a function that has nothing to do with the VC
+    let filterLauncher = FilterLauncher()
+    
     func handleFilter(){
-//        print("124")
+        filterLauncher.handleFilter()
     }
     
     

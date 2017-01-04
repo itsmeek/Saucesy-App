@@ -14,6 +14,7 @@
 		996273001E024D18007B8C6F /* AllergiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996272FF1E024D18007B8C6F /* AllergiesCell.swift */; };
 		9987959A1E1998B800EC6AF0 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998795991E1998B800EC6AF0 /* MenuCell.swift */; };
 		998F96AE1E0BF27300979DE1 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998F96AD1E0BF27300979DE1 /* ApiRequest.swift */; };
+		99B64F071E1B18DF00CC6E3B /* FilterLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B64F061E1B18DF00CC6E3B /* FilterLauncher.swift */; };
 		99E7C23C1DF38DBB0032A888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */; };
 		99E7C2411DF38DBB0032A888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99E7C23F1DF38DBB0032A888 /* Main.storyboard */; };
 		99E7C2441DF38DBB0032A888 /* Saucesy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C2421DF38DBB0032A888 /* Saucesy.xcdatamodeld */; };
@@ -36,6 +37,7 @@
 		996272FF1E024D18007B8C6F /* AllergiesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesCell.swift; sourceTree = "<group>"; };
 		998795991E1998B800EC6AF0 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		998F96AD1E0BF27300979DE1 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
+		99B64F061E1B18DF00CC6E3B /* FilterLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterLauncher.swift; sourceTree = "<group>"; };
 		99E7C2381DF38DBB0032A888 /* Saucesy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saucesy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99E7C2401DF38DBB0032A888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				99E7C2561DF39FD40032A888 /* RecipesVC.swift */,
 				99ED7F451DF89FEF00185BA6 /* RecipeDetailVC.swift */,
 				99E7C2541DF390BD0032A888 /* TabBarController.swift */,
+				99B64F061E1B18DF00CC6E3B /* FilterLauncher.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				99F8671D1E08C68D00DA3CD7 /* Recipe.swift in Sources */,
 				991E184E1E149C790027403E /* MenuBar.swift in Sources */,
 				991E18501E14A6990027403E /* BaseCell.swift in Sources */,
+				99B64F071E1B18DF00CC6E3B /* FilterLauncher.swift in Sources */,
 				9987959A1E1998B800EC6AF0 /* MenuCell.swift in Sources */,
 				99F8671F1E08D84200DA3CD7 /* Constants.swift in Sources */,
 			);
