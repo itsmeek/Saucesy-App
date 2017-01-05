@@ -46,7 +46,6 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
                 self.blackView.alpha = 1
                 self.collectionView.frame = CGRect(x: 0, y: y, width: window.frame.width, height: window.frame.height - 147)
                 }, completion: nil)
-            
         }
     }
     
@@ -54,9 +53,9 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
         UIView.animate(withDuration: 0.5, animations: {
             self.blackView.alpha = 0
             
+            //Only way to get access to the whole apps widow
             if let window = UIApplication.shared.keyWindow{
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
-                
             }
         })
     }
@@ -68,9 +67,6 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         
-        var colors: [UIColor] = [UIColor.red, UIColor.green, UIColor.blue]
-        
-        cell.backgroundColor = colors[indexPath.row]
         return cell
     }
     
@@ -98,16 +94,61 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
         collectionView.delegate = self
         
         collectionView.register(FilterCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
+        collectionView.register(FilterHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
     }
 }
 
-//
-//class FilterHeader: UICollhe {
-//    <#code#>
-//}
+class FilterHeader: BaseCell {
+    
+    let filterHeader: UILabel = {
+        let label = UILabel()
+        label.text = "Filters"
+        label.textColor = UIColor.saucesyBlue
+        label.font = UIFont(name: "Avenir", size: 18.0)
+        label.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightMedium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let resetButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Reset", for: .normal)
+        button.setTitleColor(UIColor.saucesyRed, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Avenir", size: 14.0)
+        return button
+    }()
+    
+    override func setupViews() {
+        addSubview(filterHeader)
+        addSubview(resetButton)
+        
+        filterHeader.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        filterHeader.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        resetButton.anchor(self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+    }
+}
+
 
 
 class FilterCell: BaseCell {
-    //stuff
+    
+    let filterLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Low Sugar"
+        label.textColor = UIColor.saucesyBlue
+        label.font = UIFont(name: "Avenir", size: 14.0)
+        return label
+    }()
+    
+    override func setupViews() {
+        super.setupViews()
+        
+        addSubview(filterLabel)
+        
+        addConstraintsWithFormat(format: "H:|-15-[v0]|", views: filterLabel)
+        addConstraintsWithFormat(format: "V:|-12-[v0]-12-|", views: filterLabel)
+
+    }
 }
