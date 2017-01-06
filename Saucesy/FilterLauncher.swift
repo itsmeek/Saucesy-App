@@ -118,14 +118,25 @@ class FilterHeader: BaseCell {
         return button
     }()
     
+    let applyButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Apply", for: .normal)
+        button.setTitleColor(UIColor.saucesyRed, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Avenir", size: 14.0)
+        return button
+    }()
+    
     override func setupViews() {
         addSubview(filterHeader)
         addSubview(resetButton)
+        addSubview(applyButton)
         
         filterHeader.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         filterHeader.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         resetButton.anchor(self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        applyButton.anchor(self.topAnchor, left: nil, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
     }
 }
@@ -142,13 +153,22 @@ class FilterCell: BaseCell {
         return label
     }()
     
+    let uncheckedBtn: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "emptyCheck"), for: .normal)
+        return button
+    }()
+    
     override func setupViews() {
         super.setupViews()
         
         addSubview(filterLabel)
+        addSubview(uncheckedBtn)
         
-        addConstraintsWithFormat(format: "H:|-15-[v0]|", views: filterLabel)
-        addConstraintsWithFormat(format: "V:|-12-[v0]-12-|", views: filterLabel)
+        addConstraintsWithFormat(format: "H:|-15-[v0]-[v1(24)]-20-|", views: filterLabel, uncheckedBtn)
+        addConstraintsWithFormat(format: "V:|-12-[v0]", views: filterLabel)
+        
+        addConstraintsWithFormat(format: "V:|-20-[v0(24)]", views: uncheckedBtn)
 
     }
 }
