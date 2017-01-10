@@ -10,9 +10,9 @@ import UIKit
 
 var listOfRecipies: [Recipe]?
 
-let Increment = 100
+let Increment = 10
 
-let query = "pasta"
+let query = "pizza"
 
 func downloadRecipe(completionHandler: @escaping DownloadComplete){
     
@@ -64,7 +64,7 @@ func downloadRecipe(completionHandler: @escaping DownloadComplete){
 }
 
 
-var offset = Increment
+var offset = 0
 
 var reachedEndOfItems = false
 

@@ -25,17 +25,23 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
         return [Filter(filterSection: "Diet", filters: ["Vegetarian","Vegan","Paleo", "High-Fiber", "Hight-Protein", "Low Card"]), Filter(filterSection: "Allergies", filters: ["Gluten","Dairy","Eggs", "Soy", "Wheat", "Fish", "Shellfish", "Tree nuts", "Peanuts"])]
         }()
     
+    let wrapperView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    let headerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
+        return view
+    }()
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.backgroundColor = UIColor.white
         return cv
-    }()
-    
-    let headingView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.red
-        return view
     }()
     
     let filterHeader: UILabel = {
@@ -56,37 +62,78 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
             
             window.addSubview(blackView)
-            window.addSubview(collectionView)
-            window.addSubview(headingView)
+            window.addSubview(wrapperView)
             
-//            headingView.anchor(nil, left: collectionView.leftAnchor, bottom: collectionView.topAnchor, right: collectionView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 44)
-
+            //Wrapper View
+            wrapperView.addSubview(headerView)
+            wrapperView.addSubview(collectionView)
+            
             
             collectionView.addSubview(filterHeader)
-//            filterHeader.anchor(collectionView.topAnchor, left: collectionView.leftAnchor, bottom: collectionView.topAnchor, right: collectionView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-            
-            //Collection View
+
+            //Wrapper View
             let height:CGFloat = (window.frame.height - 147)
             let frame = window.frame.height
             let y = window.frame.height - height
-            collectionView.frame = CGRect(x: 0, y: frame, width: window.frame.width, height: frame - 147)
+            wrapperView.frame = CGRect(x: 0, y: frame, width: window.frame.width, height: frame - 147)
+            
+            headerView.frame = CGRect(x: 0, y: 0, width: wrapperView.frame.width, height: 44)
+            collectionView.frame = CGRect(x: 0, y: 44, width: wrapperView.frame.width, height: wrapperView.frame.height - 44)
             
             //Black View
             blackView.frame = window.frame
             blackView.alpha = 0
             
-//            headingView.anchor(nil, left: collectionView.leftAnchor, bottom: collectionView.topAnchor, right: collectionView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 46)
+            setupHeader()
             
             UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 self.blackView.alpha = 1
-                self.headingView.layoutIfNeeded()
-                self.collectionView.frame = CGRect(x: 0, y: y, width: window.frame.width, height: window.frame.height - 147)
+                self.wrapperView.frame = CGRect(x: 0, y: y, width: window.frame.width, height: window.frame.height - 147)
                 }, completion: nil)
         }
 
     }
     
+    
+    func setupHeader(){
+        let filterTitle: UILabel = {
+            let label = UILabel()
+            label.text = "Filters"
+            label.textColor = UIColor.saucesyBlue
+            label.font = UIFont(name: "Avenir", size: 18.0)
+            label.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightRegular)
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        let resetButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("Reset", for: .normal)
+            button.setTitleColor(UIColor.saucesyRed, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Avenir", size: 14.0)
+            return button
+        }()
+        
+        let applyButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("Apply", for: .normal)
+            button.setTitleColor(UIColor.saucesyRed, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Avenir", size: 14.0)
+            return button
+        }()
+        
+        headerView.addSubview(filterTitle)
+        headerView.addSubview(resetButton)
+        headerView.addSubview(applyButton)
+        
+        filterTitle.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
+        filterTitle.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+        
+        resetButton.anchor(headerView.topAnchor, left: headerView.leftAnchor, bottom: headerView.bottomAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        applyButton.anchor(headerView.topAnchor, left: nil, bottom: headerView.bottomAnchor, right: headerView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
+    }
     
     func handleDismiss(){
         UIView.animate(withDuration: 0.5, animations: {
@@ -94,10 +141,11 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
             
             //Only way to get access to the whole apps widow
             if let window = UIApplication.shared.keyWindow{
-                self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+                self.wrapperView.frame = CGRect(x: 0, y: window.frame.height, width: self.wrapperView.frame.width, height: self.wrapperView.frame.height)
             }
         })
     }
+    
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return filters.count
@@ -126,7 +174,7 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! FilterHeader
         let headerTitle = filters[indexPath.section].filterSection
         header.filterHeader.text = headerTitle?.uppercased()
-        header.backgroundColor = UIColor(red: 233/255, green: 233/255, blue: 233/255, alpha: 1)
+        header.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1)
         return header
     }
     
@@ -148,13 +196,12 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
                 
         collectionView.register(FilterCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(FilterHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
-
     }
 }
 
+
+
 class FilterHeader: BaseCell {
-    
-    
     
         let filterHeader: UILabel = {
             let label = UILabel()
@@ -166,54 +213,16 @@ class FilterHeader: BaseCell {
             return label
         }()
     
-//    let filterHeader: UILabel = {
-//        let label = UILabel()
-//        label.text = "Filters"
-//        label.textColor = UIColor.saucesyBlue
-//        label.font = UIFont(name: "Avenir", size: 18.0)
-//        label.font = UIFont.systemFont(ofSize: 18.0, weight: UIFontWeightMedium)
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-//    
-//    let resetButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("Reset", for: .normal)
-//        button.setTitleColor(UIColor.saucesyRed, for: .normal)
-//        button.titleLabel?.font = UIFont(name: "Avenir", size: 14.0)
-//        return button
-//    }()
-//    
-//    let applyButton: UIButton = {
-//        let button = UIButton()
-//        button.setTitle("Apply", for: .normal)
-//        button.setTitleColor(UIColor.saucesyRed, for: .normal)
-//        button.titleLabel?.font = UIFont(name: "Avenir", size: 14.0)
-//        return button
-//    }()
-    
     override func setupViews() {
+        
         addSubview(filterHeader)
-//        addSubview(resetButton)
-//        addSubview(applyButton)
-        
+
         filterHeader.anchor(self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-//        
-//        filterHeader.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-//        filterHeader.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-//
-//        resetButton.anchor(self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-//        
-//        applyButton.anchor(self.topAnchor, left: nil, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
-        
     }
 }
 
-
-
 class FilterCell: BaseCell {
     
-
     var filterLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.saucesyBlue
@@ -237,7 +246,5 @@ class FilterCell: BaseCell {
         addConstraintsWithFormat(format: "V:|-12-[v0]", views: filterLabel)
         
         uncheckedBtn.anchor(self.topAnchor, left: nil, bottom: nil, right: self.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 20, widthConstant: 24, heightConstant: 24)
-        
-
     }
 }

@@ -28,6 +28,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         registerCell()
         setSelectedIndex()
         setupViews()
+        setupHorizontalBar()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,6 +55,16 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         return 0
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * frame.width / 3
+        horizontalBarLeftAnchorConstraint?.constant = x
+        print(x)
+        
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: { 
+            self.layoutIfNeeded()
+            }, completion: nil)
+    }
+    
     func registerCell(){
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
     }
@@ -67,5 +78,25 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         addSubview(collectionView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
+    }
+    
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
+    
+    func setupHorizontalBar(){
+        let horizontalBarView: UIView = {
+            let view = UIView()
+            view.backgroundColor = UIColor.saucesyRed
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
+        
+        addSubview(horizontalBarView)
+        
+        horizontalBarLeftAnchorConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        
+        horizontalBarLeftAnchorConstraint?.isActive = true
+        horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
 }

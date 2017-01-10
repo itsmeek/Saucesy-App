@@ -93,6 +93,14 @@
 			name = Menu;
 			sourceTree = "<group>";
 		};
+		998F24861E243B5500478349 /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				998F96AD1E0BF27300979DE1 /* ApiRequest.swift */,
+			);
+			name = ApiService;
+			sourceTree = "<group>";
+		};
 		99E7C22F1DF38DBB0032A888 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +120,7 @@
 		99E7C23A1DF38DBB0032A888 /* Saucesy */ = {
 			isa = PBXGroup;
 			children = (
+				998F24861E243B5500478349 /* ApiService */,
 				99E7C2501DF38F740032A888 /* Model */,
 				99E7C2511DF38F7F0032A888 /* View */,
 				99E7C2521DF38F870032A888 /* Controller */,
@@ -158,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				99E7C2581DF3B91D0032A888 /* Extensions.swift */,
-				998F96AD1E0BF27300979DE1 /* ApiRequest.swift */,
 				99F8671E1E08D84200DA3CD7 /* Constants.swift */,
 				991E184F1E14A6990027403E /* BaseCell.swift */,
 			);
@@ -377,6 +385,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = X3J8HXL99A;
 				INFOPLIST_FILE = Saucesy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -390,6 +399,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = X3J8HXL99A;
 				INFOPLIST_FILE = Saucesy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

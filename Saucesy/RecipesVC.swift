@@ -14,6 +14,13 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     
     private let recipeCellId = "recipeCellId"
     
+//    func fetchData(){
+//        ApiService.sharedInstance.downloadRecipe { (recipies: [Recipe]) in
+//            self.recipies = recipies
+//            self.collectionView?.reloadData()
+//        }
+//    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,6 +127,9 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     
     //private because no other class should have access
     fileprivate func setupMenuBar(){
+        //hides nav bar when you scroll up
+        navigationController?.hidesBarsOnSwipe = true
+        
         view.addSubview(menubar)
         
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menubar)
