@@ -76,8 +76,6 @@ class RecipeCell: UICollectionViewCell {
     
     let recipeName: UILabel = {
         let label = UILabel()
-        let recipeNameText = "Salsa Verde Chicken Bake"
-        label.text = recipeNameText
         label.textColor = UIColor.saucesyBlue
         label.font = UIFont(name: "Avenir-Medium", size: 18.0)
         label.translatesAutoresizingMaskIntoConstraints = false

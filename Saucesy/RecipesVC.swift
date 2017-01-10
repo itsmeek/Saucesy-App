@@ -14,23 +14,25 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     
     private let recipeCellId = "recipeCellId"
     
-//    func fetchData(){
-//        ApiService.sharedInstance.downloadRecipe { (recipies: [Recipe]) in
-//            self.recipies = recipies
-//            self.collectionView?.reloadData()
-//        }
-//    }
+    func fetchData(){
+        ApiService.sharedInstance.downloadRecipe { (recipies: [Recipe]) in
+            self.recipies = recipies
+            self.collectionView?.reloadData()
+        }
+    }
+    
+    func fetchMoreData(){
+        ApiService.sharedInstance.downloadMore { (recipies: [Recipe]) in
+            self.recipies = recipies
+            self.collectionView?.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         styleComponents()
-        
-        downloadRecipe { (recipies) in
-            self.recipies = recipies
-            self.collectionView?.reloadData()
-        }
-        
+        fetchData()
         setupNavBar()
         setupMenuBar()
         
@@ -50,10 +52,7 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         }
         
         if indexPath.row == (recipies?.count)! - 1{
-            downloadMore(completionHandler: { (newRecipies) in
-                self.recipies = newRecipies
-                self.collectionView?.reloadData()
-            })
+            fetchMoreData()
         }
         return cell
     }
@@ -127,8 +126,6 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
     
     //private because no other class should have access
     fileprivate func setupMenuBar(){
-        //hides nav bar when you scroll up
-        navigationController?.hidesBarsOnSwipe = true
         
         view.addSubview(menubar)
         
