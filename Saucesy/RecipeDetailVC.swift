@@ -12,11 +12,11 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let header = RecipeDetailHeader()
     
-    var recipe: Recipe? {
-        didSet{
-            header.recipeHeaderTitle.text = recipe?.name
-        }
-    }
+//    var recipe: Recipe? {
+//        didSet{
+//            header.recipeHeaderTitle.text = recipe?.name
+//        }
+//    }
     
     private let cellId = "homeDetailcellId"
     private let headerId = "homdeDetailHeadercellId"
@@ -26,7 +26,7 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+//        header.recipeHeaderTitle.text = "Its working"
         styleComponents()
         
         setupViews()
@@ -117,6 +117,8 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         header.contentView.backgroundColor = .white
         
         header.delegate = self
+        
+
     
         return header
     }

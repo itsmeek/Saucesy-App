@@ -91,9 +91,9 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         navigationController?.view.layer.add(transition, forKey: nil)
         
         //pushing
-//        let header = RecipeDetailHeader()
-//        header.recipeHeaderTitle.text = recipe.name
-        recipeDetail.header.recipeHeaderTitle.text = "test"
+        let header = RecipeDetailHeader()
+        header.recipeHeaderTitle.text = "Red Roses"
+//        recipeDetail.header.recipeHeaderTitle.text = "test"
         navigationController?.pushViewController(recipeDetail, animated: false)
 
     }

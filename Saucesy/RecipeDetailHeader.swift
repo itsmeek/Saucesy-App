@@ -32,6 +32,7 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
     override init(reuseIdentifier: String?){
         super.init(reuseIdentifier: reuseIdentifier)
         setupHeader()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
