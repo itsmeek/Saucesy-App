@@ -10,6 +10,7 @@ import UIKit
 
 class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    
     var recipies: [Recipe]?
     
     private let recipeCellId = "recipeCellId"
@@ -39,6 +40,7 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         //Programatically sets the reuse identifier
         collectionView?.register(RecipeCell.self, forCellWithReuseIdentifier: recipeCellId)
         
+        
         collectionView?.contentInset = UIEdgeInsetsMake(38, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(38, 0, 0, 0)
     }
@@ -67,11 +69,33 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         return CGSize(width: view.frame.width, height: 362.0)
     }
     
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if let selectedRecipe = recipies?[indexPath.item]{
+            showRecipeDetailFor(recipe: selectedRecipe)
+        }
+        
+//        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    func showRecipeDetailFor(recipe: Recipe){
         let recipeDetail = RecipeDetailVC()
         recipeDetail.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(recipeDetail, animated: true)
-        navigationController?.isNavigationBarHidden = true
+        
+        //Animation YEAAHH
+        let transition = CATransition()
+        transition.duration = 0.2
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        transition.type = kCATransitionFade
+        navigationController?.view.layer.add(transition, forKey: nil)
+        
+        //pushing
+//        let header = RecipeDetailHeader()
+//        header.recipeHeaderTitle.text = recipe.name
+        recipeDetail.header.recipeHeaderTitle.text = "test"
+        navigationController?.pushViewController(recipeDetail, animated: false)
+
     }
     
     //Handles phone rotation

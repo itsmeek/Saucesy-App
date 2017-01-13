@@ -10,6 +10,14 @@ import UIKit
 
 class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource, DismissDelegate {
     
+    let header = RecipeDetailHeader()
+    
+    var recipe: Recipe? {
+        didSet{
+            header.recipeHeaderTitle.text = recipe?.name
+        }
+    }
+    
     private let cellId = "homeDetailcellId"
     private let headerId = "homdeDetailHeadercellId"
     
@@ -17,6 +25,7 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         styleComponents()
         
@@ -33,6 +42,8 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     //Hides status bar of the whole apllication
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+
         UIApplication.shared.isStatusBarHidden = true
     }
     
@@ -58,6 +69,7 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func setupViews(){
         self.view.addSubview(tableView)
         self.view.addSubview(viewRecipeButton)
+        tableView.backgroundColor = UIColor.black
         
         self.view.addConstraintsWithFormat(format: "H:|[v0]|", views: tableView)
         self.view.addConstraintsWithFormat(format: "V:|[v0]-0-[v1(52)]-|", views: tableView, viewRecipeButton)

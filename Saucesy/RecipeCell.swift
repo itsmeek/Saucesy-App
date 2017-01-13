@@ -13,7 +13,6 @@ class RecipeCell: UICollectionViewCell {
     //Whenever dequed, cell calls init with frame and here is where we want to override it and add our views
     override init(frame: CGRect){
         super.init(frame: frame)
-        
         setupViews()
     }
     

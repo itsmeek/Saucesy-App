@@ -15,6 +15,12 @@ protocol DismissDelegate {
 //Custom Header
 class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
+//    var recipe: Recipe? {
+//        didSet{
+//            recipeHeaderTitle.text = recipe?.name
+//        }
+//    }
+    
     var cellClass = AllergiesCell()
     
     private let cellId = "allergyCellId"
@@ -48,7 +54,6 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = (allergies[indexPath.item]).size(attributes: nil).width
-        print(collectionView.frame.size.height - 30)
         return CGSize(width: width + 30, height: collectionView.frame.size.height - 30)
         
     }
@@ -126,8 +131,6 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
         collectionView.translatesAutoresizingMaskIntoConstraints = false;
         return collectionView
     }()
-    
-    
     
     lazy var recipeHeaderCloseButton: UIButton = {
         let button = UIButton()

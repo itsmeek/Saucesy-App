@@ -14,7 +14,7 @@ class ApiService: NSObject{
     
     var listOfRecipies: [Recipe]?
     
-    let Increment = 10
+    let Increment = 100
     
     let query = "pizza"
     
@@ -68,7 +68,7 @@ class ApiService: NSObject{
     }
     
     
-    var offset = 0
+    var offset = 100
     
     var reachedEndOfItems = false
     

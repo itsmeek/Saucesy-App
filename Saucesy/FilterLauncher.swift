@@ -177,8 +177,8 @@ class FilterLauncher: NSObject, UICollectionViewDelegate, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
-        print(indexPath.item)
+//        let cell = collectionView.cellForItem(at: indexPath)
+//        print(indexPath.item)
     }
     
     
