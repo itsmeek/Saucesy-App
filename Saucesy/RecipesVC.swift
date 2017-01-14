@@ -7,6 +7,7 @@
 //
 
 import UIKit
+var currentRecipe: Recipe!
 
 class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
@@ -90,10 +91,11 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         transition.type = kCATransitionFade
         navigationController?.view.layer.add(transition, forKey: nil)
         
+        recipeDetail.recipe = recipe
+        
         //pushing
-        let header = RecipeDetailHeader()
-        header.recipeHeaderTitle.text = "Red Roses"
-//        recipeDetail.header.recipeHeaderTitle.text = "test"
+//        recipeDetail.header.recipeHeaderTitle.text = "Working"
+//        recipeDetail.header.recipeHeaderTitle.text = currentRecipe.name
         navigationController?.pushViewController(recipeDetail, animated: false)
 
     }

@@ -12,11 +12,12 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let header = RecipeDetailHeader()
     
-//    var recipe: Recipe? {
-//        didSet{
-//            header.recipeHeaderTitle.text = recipe?.name
-//        }
-//    }
+    var recipe: Recipe? {
+        didSet{
+            header.recipeHeaderTitle.text = recipe?.name
+            header.setNeedsDisplay()
+        }
+    }
     
     private let cellId = "homeDetailcellId"
     private let headerId = "homdeDetailHeadercellId"
