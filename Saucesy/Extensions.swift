@@ -188,4 +188,19 @@ class CustomImageView: UIImageView {
     }
 }
 
+class SaucesyLabel{
+    class func setAttributedText(on: UILabel, data: Int, append: String){
+        
+            let caloriesLabel = "\(data) \(append.uppercased())"
+            let caloriesText = "\(data)"
+            on.textColor = UIColor.saucesyBlue
+            
+            let range = (caloriesLabel as NSString).range(of: caloriesText)
+            let attributedString = NSMutableAttributedString(string: caloriesLabel)
+            attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.saucesyRed , range: range)
+            on.attributedText = attributedString
+    }
+}
+
+
 

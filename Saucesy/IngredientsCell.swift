@@ -43,7 +43,7 @@ class IngredientsCell:UITableViewCell{
         }
     }
     
-    let recipeLabel: UILabel = {
+    var recipeLabel: UILabel = {
         let label = UILabel()
         let recipeNameText = "1 tablespoon fresh lime juice"
         label.text = recipeNameText

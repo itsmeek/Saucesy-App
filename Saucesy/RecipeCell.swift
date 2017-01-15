@@ -32,38 +32,17 @@ class RecipeCell: UICollectionViewCell {
             recipeDescription.text = recipe?.ingredients.joined(separator: " • ")
             
             //Sets Recipe calories
-            setAttributedText(on: recipeCalories)
+            if let data = recipe?.calories{
+                SaucesyLabel.setAttributedText(on: recipeCalories, data: data, append: "calories")
+            }
             
             //Sets Recipe servings
-            setAttributedText(on: recipeServings)
+            if let data = recipe?.servings{
+                SaucesyLabel.setAttributedText(on: recipeServings, data: data, append: "servings")
+            }
         }
     }
     
-    func setAttributedText(on: UILabel){
-        if on == recipeCalories{
-            if let response = recipe?.calories{
-                let caloriesLabel = "\(response) CALORIES"
-                let caloriesText = "\(response)"
-                on.textColor = UIColor.saucesyBlue
-                
-                let range = (caloriesLabel as NSString).range(of: caloriesText)
-                let attributedString = NSMutableAttributedString(string: caloriesLabel)
-                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.saucesyRed , range: range)
-                on.attributedText = attributedString
-            }
-        } else {
-            if let response = recipe?.servings{
-                let caloriesLabel = "\(response) SERVINGS"
-                let caloriesText = "\(response)"
-                on.textColor = UIColor.saucesyBlue
-                
-                let range = (caloriesLabel as NSString).range(of: caloriesText)
-                let attributedString = NSMutableAttributedString(string: caloriesLabel)
-                attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.saucesyRed , range: range)
-                on.attributedText = attributedString
-            }
-        }
-    }
     
     let recipeImage: CustomImageView = {
         let imageView = CustomImageView()

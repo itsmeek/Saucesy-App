@@ -10,11 +10,11 @@ import UIKit
 
 class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource, DismissDelegate {
     
-    let header = RecipeDetailHeader()
     
     var recipe: Recipe? {
         didSet{
-            viewRecipeButton.setTitle(recipe?.name, for: .normal)
+//            Set Image
+            
         }
     }
     
@@ -25,10 +25,7 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        header.recipeHeaderTitle.text = "WORKS"
-        styleComponents()
-        
+
         setupViews()
         
         tableView.delegate = self
@@ -37,6 +34,12 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         tableView.register(IngredientsCell.self, forCellReuseIdentifier: cellId)
         tableView.register(RecipeDetailHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
+        
+        styleComponents()
+
+        print(recipe?.healthLabels)
+        
+        
     }
     
     //Hides status bar of the whole apllication
@@ -80,7 +83,11 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     //Tableview
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        if let count = recipe?.ingredients.count{
+            return count
+        }
+        
+        return 0
     }
     
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -92,6 +99,10 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         selectedBackground.backgroundColor = UIColor.clear
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! IngredientsCell
+        
+        if let recipe = recipe?.ingredients[indexPath.row]{
+            cell.recipeLabel.text = recipe
+        }
         cell.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 1.0)
         cell.selectedBackgroundView = selectedBackground
         
@@ -118,7 +129,19 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         header.delegate = self
         
-
+        if let name = recipe?.name{
+            header.recipeHeaderTitle.text = name
+        }
+        
+        if let calories = recipe?.calories{
+            SaucesyLabel.setAttributedText(on: header.recipeHeaderCalories, data: calories, append: "calories")
+        }
+        
+        if let servings = recipe?.servings{
+            SaucesyLabel.setAttributedText(on: header.recipeHeaderCalories, data: servings, append: "servings")
+        }
+        
+        header.recipeDetail = self
     
         return header
     }
@@ -133,6 +156,7 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func styleComponents(){
+        tableView.backgroundColor = UIColor.white
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
     }
