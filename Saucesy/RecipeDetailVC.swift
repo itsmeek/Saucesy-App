@@ -14,8 +14,7 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var recipe: Recipe? {
         didSet{
-            print("Test")
-            header.recipeHeaderTitle.text = recipe?.name
+            viewRecipeButton.setTitle(recipe?.name, for: .normal)
         }
     }
     
@@ -27,7 +26,7 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        header.recipeHeaderTitle.text = "Its working"
+        header.recipeHeaderTitle.text = "WORKS"
         styleComponents()
         
         setupViews()

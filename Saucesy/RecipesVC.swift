@@ -57,6 +57,8 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         if indexPath.row == (recipies?.count)! - 1{
             fetchMoreData()
         }
+        
+        
         return cell
     }
     
@@ -93,10 +95,8 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         recipeDetail.recipe = recipe
         
-        
-        
-        //pushing
-//        recipeDetail.header.recipeHeaderTitle.text = "Working"
+        //Not Working
+//        recipeDetail.header.recipeHeaderTitle.text = "TEST"
 //        recipeDetail.header.recipeHeaderTitle.text = currentRecipe.name
         navigationController?.pushViewController(recipeDetail, animated: false)
 
