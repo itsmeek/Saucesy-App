@@ -14,8 +14,8 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var recipe: Recipe? {
         didSet{
+            print("Test")
             header.recipeHeaderTitle.text = recipe?.name
-            header.setNeedsDisplay()
         }
     }
     

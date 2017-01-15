@@ -93,6 +93,8 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         recipeDetail.recipe = recipe
         
+        
+        
         //pushing
 //        recipeDetail.header.recipeHeaderTitle.text = "Working"
 //        recipeDetail.header.recipeHeaderTitle.text = currentRecipe.name
