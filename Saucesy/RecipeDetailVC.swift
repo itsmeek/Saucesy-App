@@ -11,11 +11,7 @@ import UIKit
 class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource, DismissDelegate {
     
     
-    var recipe: Recipe? {
-        didSet{
-
-        }
-    }
+    var recipe: Recipe? 
     
     
     private let cellId = "homeDetailcellId"
@@ -37,7 +33,7 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         styleComponents()
         
-        print(recipe)
+        print("FROM DTVC \(recipe?.healthLabels)")
         
     }
     

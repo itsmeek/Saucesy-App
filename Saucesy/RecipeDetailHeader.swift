@@ -15,7 +15,15 @@ protocol DismissDelegate {
 //Custom Header
 class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
-    var recipeDetail = RecipeDetailVC()
+    var recipeDetail:RecipeDetailVC?{
+        didSet{
+            if let imageURL = recipeDetail?.recipe?.image{
+                headerImage.loadImageUsingUrlString(urlString: imageURL)
+            }else{
+                headerImage.image = #imageLiteral(resourceName: "foodImage")
+            }
+        }
+    }
     
     var cellClass = AllergiesCell()
     
@@ -23,18 +31,14 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
     
     var delegate: DismissDelegate? = nil
     
-    let allergies = ["Egg-Free", "Peanut-Free", "Tree-Nut-Free", "Soy-Free", "Fish-Free", "Shellfish-Free"]
+//    let allergies = ["Egg-Free", "Peanut-Free", "Tree-Nut-Free", "Soy-Free", "Fish-Free", "Shellfish-Free"]
+    
+    let allergies = [String]()
+
     
     override init(reuseIdentifier: String?){
         super.init(reuseIdentifier: reuseIdentifier)
         setupHeader()
-        print(recipeDetail)
-        if let recipe = recipeDetail.recipe{
-            print(recipe.healthLabels)
-        }else{
-            print("Didnt reach")
-        }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,17 +46,20 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allergies.count
+        
+        if let healthLabel = recipeDetail?.recipe?.healthLabels{
+            return healthLabel.count
+        }
+        
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AllergiesCell
         
-        cell.configureCell(name: allergies[indexPath.item])
-        
-//        if let name = recipeDetail.recipe?.healthLabels[indexPath.item] {
-//            cell.configureCell(name: name)
-//        }
+        if let name = recipeDetail?.recipe?.healthLabels[indexPath.item] {
+            cell.configureCell(name: name)
+        }
         
         cell.contentView.backgroundColor = UIColor.saucesyBlue
         cell.contentView.layer.cornerRadius = 22 / 2
@@ -62,9 +69,12 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = (allergies[indexPath.item]).size(attributes: nil).width
-        return CGSize(width: width + 30, height: collectionView.frame.size.height - 30)
+        if let label = recipeDetail?.recipe?.healthLabels[indexPath.item] {
+            let width = label.size(attributes: nil).width
+            return CGSize(width: width + 30, height: collectionView.frame.size.height - 30) 
+        }
         
+        return CGSize(width: 100, height: collectionView.frame.size.height - 30)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -75,8 +85,8 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
         return UIEdgeInsetsMake(0, 20, 0, 20)
     }
     
-    let headerImage: UIImageView = {
-        let imageView = UIImageView()
+    let headerImage: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.image = UIImage(named: "foodImage")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
