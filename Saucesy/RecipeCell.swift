@@ -103,7 +103,6 @@ class RecipeCell: UICollectionViewCell {
     func setupRecipeImage(){
         if let recipePhotoUrl = recipe?.image{
             recipeImage.loadImageUsingUrlString(urlString: recipePhotoUrl)
-            print(recipePhotoUrl)
         }
     }
     

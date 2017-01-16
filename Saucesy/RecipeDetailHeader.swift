@@ -23,12 +23,18 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
     
     var delegate: DismissDelegate? = nil
     
-    let allergies = ["Honey", "Peanut", "Candy", "tic-tacfghcfc", "oil", "Peanut Butter Soup", "Ham", "Cereal", "Vitamin-C"]
+    let allergies = ["Egg-Free", "Peanut-Free", "Tree-Nut-Free", "Soy-Free", "Fish-Free", "Shellfish-Free"]
     
     override init(reuseIdentifier: String?){
         super.init(reuseIdentifier: reuseIdentifier)
         setupHeader()
-                
+        print(recipeDetail)
+        if let recipe = recipeDetail.recipe{
+            print(recipe.healthLabels)
+        }else{
+            print("Didnt reach")
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,33 +42,28 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = recipeDetail.recipe?.healthLabels.count {
-            print(count)
-            return count
-        }
-        
-        return 0
+        return allergies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AllergiesCell
+        
+        cell.configureCell(name: allergies[indexPath.item])
         
 //        if let name = recipeDetail.recipe?.healthLabels[indexPath.item] {
 //            cell.configureCell(name: name)
 //        }
         
         cell.contentView.backgroundColor = UIColor.saucesyBlue
-        cell.configureCell(name: allergies[indexPath.item])
         cell.contentView.layer.cornerRadius = 22 / 2
         cell.contentView.layer.masksToBounds = true
-    
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let width = (allergies[indexPath.item]).size(attributes: nil).width
-        return CGSize(width: width, height: collectionView.frame.size.height - 30)
+        return CGSize(width: width + 30, height: collectionView.frame.size.height - 30)
         
     }
     
@@ -73,7 +74,6 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(0, 20, 0, 20)
     }
-    
     
     let headerImage: UIImageView = {
         let imageView = UIImageView()
@@ -197,3 +197,4 @@ class RecipeDetailHeader: UITableViewHeaderFooterView, UICollectionViewDelegate,
         
     }
 }
+

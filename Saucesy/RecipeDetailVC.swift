@@ -13,10 +13,10 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var recipe: Recipe? {
         didSet{
-//            Set Image
-            
+
         }
     }
+    
     
     private let cellId = "homeDetailcellId"
     private let headerId = "homdeDetailHeadercellId"
@@ -36,9 +36,8 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.register(RecipeDetailHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
         
         styleComponents()
-
-        print(recipe?.healthLabels)
         
+        print(recipe)
         
     }
     
