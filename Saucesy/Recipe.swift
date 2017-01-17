@@ -16,6 +16,7 @@ class Recipe{
     private var _ingredients: Array<String>!
     private var _calories: Int!
     private var _servings: Int!
+    private var _recipeUrl: String!
     
     var image: String {
         if _image == nil{
@@ -59,13 +60,21 @@ class Recipe{
         return _servings
     }
     
-    init(image: String, name: String, healthLabels: Array<String>, ingredients: Array<String>, calories: Int, servings: Int) {
+    var recipeUrl: String {
+        if _recipeUrl == nil{
+            _recipeUrl = ""
+        }
+        return _recipeUrl
+    }
+    
+    init(image: String, name: String, healthLabels: Array<String>, ingredients: Array<String>, calories: Int, servings: Int, recipeUrl: String) {
         self._image = image
         self._name = name
         self._healthLabels = healthLabels
         self._ingredients = ingredients
         self._calories = calories
         self._servings = servings
+        self._recipeUrl = recipeUrl
     }
     
 }

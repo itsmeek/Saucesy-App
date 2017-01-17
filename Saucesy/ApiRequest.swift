@@ -49,8 +49,10 @@ class ApiService: NSObject{
                             let ingredients = recipe["ingredientLines"] as? Array<String>
                             let calories = recipe["calories"] as? Int
                             let servings = recipe["yield"] as? Int
+                            let recipeUrl = recipe["url"] as? String
                             
-                            let recipe = Recipe(image: image!, name: name!, healthLabels: healthLabels!, ingredients: ingredients!, calories: calories!, servings: servings!)
+                            let recipe = Recipe(image: image!, name: name!, healthLabels: healthLabels!, ingredients: ingredients!, calories: calories!, servings: servings!, recipeUrl: recipeUrl!)
+                            
                             self.listOfRecipies?.append(recipe)
                             
                         }
@@ -109,8 +111,9 @@ class ApiService: NSObject{
                             let ingredients = recipe["ingredientLines"] as? Array<String>
                             let calories = recipe["calories"] as? Int
                             let servings = recipe["yield"] as? Int
+                            let recipeUrl = recipe["url"] as? String
                             
-                            let recipe = Recipe(image: image!, name: name!, healthLabels: healthLabels!, ingredients: ingredients!, calories: calories!, servings: servings!)
+                            let recipe = Recipe(image: image!, name: name!, healthLabels: healthLabels!, ingredients: ingredients!, calories: calories!, servings: servings!, recipeUrl: recipeUrl!)
                             
                             self.listOfRecipies?.append(recipe)
                             

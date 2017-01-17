@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource, DismissDelegate {
     
@@ -41,28 +42,42 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-
         UIApplication.shared.isStatusBarHidden = true
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    func dismissVC() {
+        
+        let transition = CATransition()
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
+        transition.type = kCATransitionFade
+        //        transition.subtype = kCATransitionFromBottom
+        navigationController?.view.layer.add(transition, forKey: nil)
+        navigationController?.pop(animated: true)
+
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
         UIApplication.shared.isStatusBarHidden = false
     }
     
-    func dismissVC() {
-        navigationController?.pop(animated: true)
-    }
-    
-    let viewRecipeButton: UIButton = {
+    lazy var viewRecipeButton: UIButton = {
         let button = UIButton()
         button.setTitle("View Recipe", for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir", size: 14.0)
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = UIColor.saucesyBlue
+        button.addTarget(self, action: #selector(showWebRecipe), for: .touchUpInside)
         return button
     }()
+    
+    func showWebRecipe(){
+        
+        if let urlStr = recipe?.recipeUrl{
+            let url = URL(string: urlStr)!
+            let webVC =  SFSafariViewController(url: url)
+            present(webVC, animated: true, completion: nil)
+        }
+    }
     
     func setupViews(){
         self.view.addSubview(tableView)

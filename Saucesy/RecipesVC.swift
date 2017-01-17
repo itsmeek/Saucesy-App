@@ -7,7 +7,6 @@
 //
 
 import UIKit
-var currentRecipe: Recipe!
 
 class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
@@ -88,17 +87,15 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         
         //Animation YEAAHH
         let transition = CATransition()
-        transition.duration = 0.2
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        transition.duration = 0.5
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
         transition.type = kCATransitionFade
+        transition.subtype = kCATransitionFromRight
         navigationController?.view.layer.add(transition, forKey: nil)
         
         recipeDetail.recipe = recipe
-        
-        //Not Working
-//        recipeDetail.header.recipeHeaderTitle.text = "TEST"
-//        recipeDetail.header.recipeHeaderTitle.text = currentRecipe.name
-        navigationController?.pushViewController(recipeDetail, animated: false)
+
+        navigationController?.pushViewController(recipeDetail, animated: true)
 
     }
     
