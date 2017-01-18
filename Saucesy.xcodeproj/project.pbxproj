@@ -17,6 +17,7 @@
 		99931E6E1E25462A00EB4EF7 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99931E6D1E25462A00EB4EF7 /* Filter.swift */; };
 		99931E701E25468E00EB4EF7 /* FilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99931E6F1E25468E00EB4EF7 /* FilterCell.swift */; };
 		99931E721E2546C800EB4EF7 /* FilterHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99931E711E2546C800EB4EF7 /* FilterHeader.swift */; };
+		999CA7E71E2EDF5900AF8B12 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999CA7E61E2EDF5900AF8B12 /* SearchVC.swift */; };
 		99B64F071E1B18DF00CC6E3B /* FilterLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B64F061E1B18DF00CC6E3B /* FilterLauncher.swift */; };
 		99E7C23C1DF38DBB0032A888 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */; };
 		99E7C2411DF38DBB0032A888 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99E7C23F1DF38DBB0032A888 /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 		99931E6D1E25462A00EB4EF7 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		99931E6F1E25468E00EB4EF7 /* FilterCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterCell.swift; sourceTree = "<group>"; };
 		99931E711E2546C800EB4EF7 /* FilterHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterHeader.swift; sourceTree = "<group>"; };
+		999CA7E61E2EDF5900AF8B12 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		99B64F061E1B18DF00CC6E3B /* FilterLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterLauncher.swift; sourceTree = "<group>"; };
 		99E7C2381DF38DBB0032A888 /* Saucesy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Saucesy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,16 @@
 			name = Filter;
 			sourceTree = "<group>";
 		};
+		999CA7E51E2EDF3100AF8B12 /* Recipes */ = {
+			isa = PBXGroup;
+			children = (
+				99E7C2561DF39FD40032A888 /* RecipesVC.swift */,
+				99ED7F451DF89FEF00185BA6 /* RecipeDetailVC.swift */,
+				99B64F061E1B18DF00CC6E3B /* FilterLauncher.swift */,
+			);
+			name = Recipes;
+			sourceTree = "<group>";
+		};
 		99E7C22F1DF38DBB0032A888 = {
 			isa = PBXGroup;
 			children = (
@@ -173,9 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				99E7C2541DF390BD0032A888 /* TabBarController.swift */,
-				99E7C2561DF39FD40032A888 /* RecipesVC.swift */,
-				99ED7F451DF89FEF00185BA6 /* RecipeDetailVC.swift */,
-				99B64F061E1B18DF00CC6E3B /* FilterLauncher.swift */,
+				999CA7E51E2EDF3100AF8B12 /* Recipes */,
+				999CA7E61E2EDF5900AF8B12 /* SearchVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -269,6 +280,7 @@
 				99E7C2591DF3B91D0032A888 /* Extensions.swift in Sources */,
 				99E7C2571DF39FD40032A888 /* RecipesVC.swift in Sources */,
 				99E7C2441DF38DBB0032A888 /* Saucesy.xcdatamodeld in Sources */,
+				999CA7E71E2EDF5900AF8B12 /* SearchVC.swift in Sources */,
 				99515B8B1E06FBA0002FEB1F /* IngredientsCell.swift in Sources */,
 				99ED7F461DF89FEF00185BA6 /* RecipeDetailVC.swift in Sources */,
 				99931E6E1E25462A00EB4EF7 /* Filter.swift in Sources */,

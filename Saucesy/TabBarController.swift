@@ -16,6 +16,10 @@ class TabBarController: UITabBarController {
         let recipesController = RecipesVC(collectionViewLayout: layout)
         let recipesNC = UINavigationController(rootViewController: recipesController)
         
+        // search view
+        let search = SearchVC()
+        let searchVC = UINavigationController(rootViewController: search)
+        
         //Changes text color of tab bar bottom text
         let attributesNormal = [
             NSForegroundColorAttributeName : UIColor.saucesyBlue,
@@ -33,6 +37,8 @@ class TabBarController: UITabBarController {
         //Changes image of tab bar
         recipesNC.tabBarItem = UITabBarItem(title: "Recipes", image: UIImage(named: "recipesBarItem")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "recipesBarItemFilled"))
         
+        searchVC.tabBarItem = UITabBarItem(title: "Search".capitalized, image: UIImage(named: "ingredientsBarItem")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "ingredientsBarItemFilled"))
+        
         //Tint color of selected Item
         self.tabBar.tintColor = UIColor.saucesyRed
         
@@ -40,7 +46,7 @@ class TabBarController: UITabBarController {
         self.tabBar.barTintColor = .white
         
         //Array of view controllers in tab bar
-        viewControllers = [recipesNC, createController(controllerName: "ingredients"), createController(controllerName: "list"), createController(controllerName: "liked")]
+        viewControllers = [recipesNC, searchVC, createController(controllerName: "list"), createController(controllerName: "liked")]
     }
     
     private func createController(controllerName: String) -> UINavigationController {
