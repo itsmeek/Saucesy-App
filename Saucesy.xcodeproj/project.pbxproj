@@ -95,13 +95,6 @@
 			name = "Recipe Details";
 			sourceTree = "<group>";
 		};
-		995FB4121E308F58002525DE /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = CoreData;
-			sourceTree = "<group>";
-		};
 		9971FB561E3044FF00A8E31C /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,7 +166,6 @@
 		99E7C23A1DF38DBB0032A888 /* Saucesy */ = {
 			isa = PBXGroup;
 			children = (
-				995FB4121E308F58002525DE /* CoreData */,
 				998F24861E243B5500478349 /* ApiService */,
 				99E7C2501DF38F740032A888 /* Model */,
 				99E7C2511DF38F7F0032A888 /* View */,

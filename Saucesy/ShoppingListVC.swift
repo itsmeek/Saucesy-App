@@ -15,10 +15,11 @@ struct List {
 }
 
 
-class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate {
+class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate, UITextViewDelegate {
     
     private let cellId = "cellId"
     private let headerId = "headerId"
+    private let footerId = "footerId"
     
     var frc: NSFetchedResultsController<ShoppingList>!
     
@@ -28,11 +29,18 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate 
         styleComponents()
         setupNavBar()
         
+        
+        
+//        generateTestData()
+        
+        attemptFetch()
+        
         tableView = UITableView(frame: self.tableView.frame, style: .grouped)
         tableView.separatorStyle = .none
         
         tableView.register(ShoppingListCell.self, forCellReuseIdentifier: cellId)
         tableView.register(ShoppingListHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
+        tableView.register(ShoppingListFooter.self, forHeaderFooterViewReuseIdentifier: footerId)
     }
     
     var shoppingLists: [List] = {
@@ -65,20 +73,34 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate 
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return shoppingLists.count
+        if let sections = frc.sections{
+            return sections.count
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shoppingLists[section].lists.count
+        if let sections = frc.sections{
+            let sectionInfo = sections[section]
+            return sectionInfo.numberOfObjects
+        }
+        
+        return 0
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as!  ShoppingListCell
         
-        cell.filterLabel.text = shoppingLists[indexPath.section].lists[indexPath.row]
+        updateCell(cell: cell, indexPath: indexPath as NSIndexPath)
         
         return cell
+    }
+    
+    func updateCell(cell: ShoppingListCell, indexPath: NSIndexPath){
+        let item = frc.object(at: indexPath as IndexPath)
+        cell.configureCell(shoppingList: item)
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -89,6 +111,12 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! ShoppingListHeader
         
+        if let sections = frc.sections{
+            let sectionInfo = sections[section]
+            
+            header.headerLabelCount.text = "\(sectionInfo.numberOfObjects) Items"
+        }
+        
         return header
     }
     
@@ -96,18 +124,29 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate 
         return 40
     }
     
-    //removes 20px padding for the footer
+    //Footer
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: footerId) as! ShoppingListFooter
+        
+        return footer
+    }
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        return 44
     }
     
     //CORE DATA
     func attemptFetch(){
         let fetchRequest: NSFetchRequest<ShoppingList> = ShoppingList.fetchRequest()
-        let dateSort = NSSortDescriptor(key: "created", ascending: false)
+        let dateSort = NSSortDescriptor(key: "created", ascending: true)
         fetchRequest.sortDescriptors = [dateSort]
         
         let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        
+        controller.delegate = self
+        
+        frc = controller
         
         do{
             try controller.performFetch()
@@ -126,6 +165,7 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate 
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
         switch (type) {
         case .insert:
             if let indexPath = newIndexPath{
@@ -139,15 +179,33 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate 
             break
         case .update:
             if let indexPath = newIndexPath{
-                let cell = tableView.cellForRow(at: indexPath)
-                //update cell data
+                let cell = tableView.cellForRow(at: indexPath) as! ShoppingListCell
+                updateCell(cell: cell, indexPath: indexPath as NSIndexPath)
+                
             }
             break
-        default:
-            print("default")
+        case .move:
+            if let indexPath = indexPath{
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+            
+            if let indexPath = newIndexPath{
+                tableView.insertRows(at: [indexPath], with: .fade)
+            }
         }
     }
     
+    func generateTestData(){
+        let list = ShoppingList(context: context)
+        list.item = "Saucesage"
+        list.purchased = false
+        
+        let list2 = ShoppingList(context: context)
+        list2.item = "Beer"
+        list2.purchased = false
+        
+        ad.saveContext()
+    }
     
 }
 
@@ -166,7 +224,7 @@ class ShoppingListCell: UITableViewCell{
     var filterLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.saucesyBlue
-        label.font = UIFont(name: "Avenir", size: 14.0)
+        label.font = UIFont(name: "Avenir", size: 15.0)
         return label
     }()
     
@@ -186,13 +244,84 @@ class ShoppingListCell: UITableViewCell{
         filterLabel.anchor(self.topAnchor, left: self.uncheckedBtn.rightAnchor, bottom: self.bottomAnchor, right: nil, topConstant: 0, leftConstant: 14, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 10)
         
     }
+    
+    func configureCell(shoppingList: ShoppingList){
+        filterLabel.text = shoppingList.item
+    }
+}
+
+class ShoppingListFooter: UITableViewHeaderFooterView, UITextViewDelegate, UITextFieldDelegate{
+    
+    override init(reuseIdentifier: String?){
+        super.init(reuseIdentifier: reuseIdentifier)
+        setupViews()
+        self.contentView.backgroundColor = UIColor.white
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    let addBtn: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "addIcon"), for: .normal)
+        button.contentMode = .scaleAspectFit
+        return button
+    }()
+    
+    let addField: UITextField = {
+        let textfield = UITextField()
+        textfield.backgroundColor = UIColor.white
+        textfield.font = UIFont(name: "Avenir-Medium", size: 15)
+        textfield.textColor = UIColor.saucesyBlue
+        textfield.returnKeyType = .done
+        return textfield
+    }()
+    
+    func setupViews(){
+        addSubview(addBtn)
+        addSubview(addField)
+        
+        addField.delegate = self
+        addField.attributedPlaceholder = NSAttributedString(string: "Add Ingredient", attributes: [NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 15)!])
+        
+        addConstraintsWithFormat(format: "H:|-15-[v0(24)]", views: addBtn)
+        addConstraintsWithFormat(format: "V:|[v0]|", views: addBtn)
+        
+        addField.anchor(self.topAnchor, left: self.addBtn.rightAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topConstant: 0, leftConstant: 14, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = addField.text, !text.isEmpty else {
+            return false
+        }
+        
+        instertData(text: text)
+        
+        addField.resignFirstResponder()
+        return true
+    }
+    
+    func instertData(text: String){
+        let list = ShoppingList(context: context)
+
+        list.item = text
+        
+        addField.text = ""
+
+        list.purchased = false
+        
+        ad.saveContext()
+    }
+
 }
 
 class ShoppingListHeader: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?){
         super.init(reuseIdentifier: reuseIdentifier)
         setupViews()
-        contentView.backgroundColor = UIColor(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0)
+        self.contentView.backgroundColor = UIColor(red: 228/255, green: 228/255, blue: 228/255, alpha: 1.0)
     }
     
     required init?(coder aDecoder: NSCoder) {
