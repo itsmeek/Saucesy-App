@@ -95,6 +95,13 @@
 			name = "Recipe Details";
 			sourceTree = "<group>";
 		};
+		995FB4121E308F58002525DE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		9971FB561E3044FF00A8E31C /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,11 +173,11 @@
 		99E7C23A1DF38DBB0032A888 /* Saucesy */ = {
 			isa = PBXGroup;
 			children = (
+				995FB4121E308F58002525DE /* CoreData */,
 				998F24861E243B5500478349 /* ApiService */,
 				99E7C2501DF38F740032A888 /* Model */,
 				99E7C2511DF38F7F0032A888 /* View */,
 				99E7C2521DF38F870032A888 /* Controller */,
-				9971FB591E30462100A8E31C /* ShoppingList */,
 				99E7C2531DF38F8F0032A888 /* Utilities */,
 				99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */,
 				99E7C23F1DF38DBB0032A888 /* Main.storyboard */,
@@ -208,6 +215,7 @@
 				99E7C2541DF390BD0032A888 /* TabBarController.swift */,
 				999CA7E51E2EDF3100AF8B12 /* Recipes */,
 				9971FB561E3044FF00A8E31C /* Search */,
+				9971FB591E30462100A8E31C /* ShoppingList */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

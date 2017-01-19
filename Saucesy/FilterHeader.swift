@@ -12,11 +12,9 @@ class FilterHeader: BaseCell {
     
     let filterHeader: UILabel = {
         let label = UILabel()
-        label.text = "diet".uppercased()
         label.textColor = UIColor.saucesyBlue
         label.font = UIFont(name: "Avenir", size: 12.0)
         label.font = UIFont.systemFont(ofSize: 12.0, weight: UIFontWeightSemibold)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
