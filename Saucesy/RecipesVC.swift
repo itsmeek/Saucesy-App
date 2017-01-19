@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RecipesVC: UICollectionViewController {
+class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     
     var recipies: [Recipe]?
