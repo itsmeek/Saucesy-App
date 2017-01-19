@@ -12,6 +12,8 @@
 		991E18501E14A6990027403E /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E184F1E14A6990027403E /* BaseCell.swift */; };
 		99515B8B1E06FBA0002FEB1F /* IngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99515B8A1E06FBA0002FEB1F /* IngredientsCell.swift */; };
 		996273001E024D18007B8C6F /* AllergiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996272FF1E024D18007B8C6F /* AllergiesCell.swift */; };
+		9971FB551E2FF45C00A8E31C /* T.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9971FB541E2FF45C00A8E31C /* T.swift */; };
+		9971FB581E30461D00A8E31C /* ShoppingListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9971FB571E30461D00A8E31C /* ShoppingListVC.swift */; };
 		9987959A1E1998B800EC6AF0 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998795991E1998B800EC6AF0 /* MenuCell.swift */; };
 		998F96AE1E0BF27300979DE1 /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998F96AD1E0BF27300979DE1 /* ApiRequest.swift */; };
 		99931E6E1E25462A00EB4EF7 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99931E6D1E25462A00EB4EF7 /* Filter.swift */; };
@@ -39,6 +41,8 @@
 		991E184F1E14A6990027403E /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
 		99515B8A1E06FBA0002FEB1F /* IngredientsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientsCell.swift; sourceTree = "<group>"; };
 		996272FF1E024D18007B8C6F /* AllergiesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllergiesCell.swift; sourceTree = "<group>"; };
+		9971FB541E2FF45C00A8E31C /* T.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = T.swift; sourceTree = "<group>"; };
+		9971FB571E30461D00A8E31C /* ShoppingListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListVC.swift; sourceTree = "<group>"; };
 		998795991E1998B800EC6AF0 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		998F96AD1E0BF27300979DE1 /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
 		99931E6D1E25462A00EB4EF7 /* Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
@@ -89,6 +93,22 @@
 				99515B8A1E06FBA0002FEB1F /* IngredientsCell.swift */,
 			);
 			name = "Recipe Details";
+			sourceTree = "<group>";
+		};
+		9971FB561E3044FF00A8E31C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				999CA7E61E2EDF5900AF8B12 /* SearchVC.swift */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		9971FB591E30462100A8E31C /* ShoppingList */ = {
+			isa = PBXGroup;
+			children = (
+				9971FB571E30461D00A8E31C /* ShoppingListVC.swift */,
+			);
+			name = ShoppingList;
 			sourceTree = "<group>";
 		};
 		998795981E19985200EC6AF0 /* Menu */ = {
@@ -150,6 +170,7 @@
 				99E7C2501DF38F740032A888 /* Model */,
 				99E7C2511DF38F7F0032A888 /* View */,
 				99E7C2521DF38F870032A888 /* Controller */,
+				9971FB591E30462100A8E31C /* ShoppingList */,
 				99E7C2531DF38F8F0032A888 /* Utilities */,
 				99E7C23B1DF38DBB0032A888 /* AppDelegate.swift */,
 				99E7C23F1DF38DBB0032A888 /* Main.storyboard */,
@@ -186,7 +207,7 @@
 			children = (
 				99E7C2541DF390BD0032A888 /* TabBarController.swift */,
 				999CA7E51E2EDF3100AF8B12 /* Recipes */,
-				999CA7E61E2EDF5900AF8B12 /* SearchVC.swift */,
+				9971FB561E3044FF00A8E31C /* Search */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -197,6 +218,7 @@
 				99E7C2581DF3B91D0032A888 /* Extensions.swift */,
 				99F8671E1E08D84200DA3CD7 /* Constants.swift */,
 				991E184F1E14A6990027403E /* BaseCell.swift */,
+				9971FB541E2FF45C00A8E31C /* T.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -275,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				99931E701E25468E00EB4EF7 /* FilterCell.swift in Sources */,
+				9971FB581E30461D00A8E31C /* ShoppingListVC.swift in Sources */,
 				998F96AE1E0BF27300979DE1 /* ApiRequest.swift in Sources */,
 				996273001E024D18007B8C6F /* AllergiesCell.swift in Sources */,
 				99E7C2591DF3B91D0032A888 /* Extensions.swift in Sources */,
@@ -294,6 +317,7 @@
 				991E18501E14A6990027403E /* BaseCell.swift in Sources */,
 				99B64F071E1B18DF00CC6E3B /* FilterLauncher.swift in Sources */,
 				9987959A1E1998B800EC6AF0 /* MenuCell.swift in Sources */,
+				9971FB551E2FF45C00A8E31C /* T.swift in Sources */,
 				99F8671F1E08D84200DA3CD7 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

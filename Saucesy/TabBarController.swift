@@ -20,6 +20,11 @@ class TabBarController: UITabBarController {
         let search = SearchVC()
         let searchVC = UINavigationController(rootViewController: search)
         
+        //shopping list
+        
+        let shopping = ShoppingListVC()
+        let shoppingVC = UINavigationController(rootViewController: shopping)
+        
         //Changes text color of tab bar bottom text
         let attributesNormal = [
             NSForegroundColorAttributeName : UIColor.saucesyBlue,
@@ -37,7 +42,9 @@ class TabBarController: UITabBarController {
         //Changes image of tab bar
         recipesNC.tabBarItem = UITabBarItem(title: "Recipes", image: UIImage(named: "recipesBarItem")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "recipesBarItemFilled"))
         
-        searchVC.tabBarItem = UITabBarItem(title: "Search".capitalized, image: UIImage(named: "ingredientsBarItem")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "ingredientsBarItemFilled"))
+        searchVC.tabBarItem = UITabBarItem(title: "Search", image: UIImage(named: "ingredientsBarItem")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "ingredientsBarItemFilled"))
+        
+        shoppingVC.tabBarItem = UITabBarItem(title: "Shopping List", image: UIImage(named: "listBarItem")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "listBarItemFilled")?.withRenderingMode(.alwaysOriginal))
         
         //Tint color of selected Item
         self.tabBar.tintColor = UIColor.saucesyRed
@@ -46,10 +53,11 @@ class TabBarController: UITabBarController {
         self.tabBar.barTintColor = .white
         
         //Array of view controllers in tab bar
-        viewControllers = [recipesNC, searchVC, createController(controllerName: "list"), createController(controllerName: "liked")]
+        viewControllers = [recipesNC, searchVC, shoppingVC, createController(controllerName: "liked")]
     }
     
     private func createController(controllerName: String) -> UINavigationController {
+        
         
         let viewController = UIViewController()
         let navController = UINavigationController(rootViewController: viewController)
