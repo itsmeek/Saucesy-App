@@ -73,19 +73,18 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if let sections = frc.sections{
-            return sections.count
-        }
-        return 0
+        
+        guard let section = frc.sections else {return 0}
+        
+        return section.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sections = frc.sections{
-            let sectionInfo = sections[section]
-            return sectionInfo.numberOfObjects
-        }
         
-        return 0
+        guard let section = frc.sections?[section] else {return 0}
+        
+        return section.numberOfObjects
+        
     }
     
     
@@ -107,15 +106,39 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         return 44
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let objs = frc.fetchedObjects , objs.count > 0{
+//            let item = objs[indexPath.row]
+//            
+//            if item.purchased == false{
+//                context.delete(item)
+//                item.purchased = true
+//            }
+//        }
+        
+        let item = frc.object(at: indexPath)
+        
+        print(item)
+        
+        if item.purchased == false{
+            context.delete(item)
+            item.purchased = true
+            
+        } else {
+            print("false")
+        }
+        
+        print(item)
+        
+    }
+    
     //Header
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! ShoppingListHeader
         
-        if let sections = frc.sections{
-            let sectionInfo = sections[section]
-            
-            header.headerLabelCount.text = "\(sectionInfo.numberOfObjects) Items"
-        }
+        guard let section = frc.sections?[section] else {fatalError("Unexpected Section")}
+        
+        header.headerLabelCount.text = "\(section.numberOfObjects) Items"
         
         return header
     }
@@ -142,7 +165,7 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         let dateSort = NSSortDescriptor(key: "created", ascending: true)
         fetchRequest.sortDescriptors = [dateSort]
         
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: "item", cacheName: nil)
         
         controller.delegate = self
         
@@ -164,9 +187,28 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         tableView.endUpdates()
     }
     
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+            
+        case .insert:
+            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+
+        case .delete:
+            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+            
+        case .move:
+            break
+            
+        case .update:
+            break
+        }
+    }
+    
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
-        switch (type) {
+        switch type {
+            
         case .insert:
             if let indexPath = newIndexPath{
                 tableView.insertRows(at: [indexPath], with: .fade)
@@ -312,7 +354,7 @@ class ShoppingListFooter: UITableViewHeaderFooterView, UITextViewDelegate, UITex
 
         list.purchased = false
         
-        ad.saveContext()
+//        ad.saveContext()
     }
 
 }
