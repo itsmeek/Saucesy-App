@@ -43,10 +43,6 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         tableView.register(ShoppingListFooter.self, forHeaderFooterViewReuseIdentifier: footerId)
     }
     
-    var shoppingLists: [List] = {
-        return [List(listTitle: "unpurchased".uppercased(), lists: ["Test 1", "Test 2", "Test 3"]),List(listTitle: "Purchased".uppercased(), lists: ["Test 1", "Test 2", "Test 3"])]
-    }()
-    
     func styleComponents(){
         //Changes the title text Featured
         navigationItem.title = "My Shopping List"
@@ -118,8 +114,6 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         
         let item = frc.object(at: indexPath)
         
-        print(item)
-        
         if item.purchased == false{
             context.delete(item)
             item.purchased = true
@@ -127,8 +121,6 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         } else {
             print("false")
         }
-        
-        print(item)
         
     }
     
@@ -162,10 +154,10 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
     //CORE DATA
     func attemptFetch(){
         let fetchRequest: NSFetchRequest<ShoppingList> = ShoppingList.fetchRequest()
-        let dateSort = NSSortDescriptor(key: "created", ascending: true)
+        let dateSort = NSSortDescriptor(key: "created", ascending: false)
         fetchRequest.sortDescriptors = [dateSort]
         
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: "item", cacheName: nil)
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
         controller.delegate = self
         

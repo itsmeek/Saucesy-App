@@ -89,14 +89,14 @@ class RecipeCell: UICollectionViewCell {
     
     lazy var likeButton: UIButton = {
         let button = UIButton()
-        let buttonEmpty: UIImage = UIImage(named: "likedBarItem")!
+        let buttonEmpty: UIImage = UIImage(named: "pinIcon")!
         button.setImage(buttonEmpty, for: .normal)
         button.addTarget(self, action: #selector(handleLikes), for: .touchUpInside)
         return button
     }()
     
     func handleLikes(){
-        let buttonFilled: UIImage = UIImage(named: "likedBarItemFilled")!
+        let buttonFilled: UIImage = UIImage(named: "pinIconFilled")!
         likeButton.setImage(buttonFilled, for: .normal)
     }
     
@@ -113,7 +113,8 @@ class RecipeCell: UICollectionViewCell {
         
         addSubview(recipeImage)
         addSubview(recipeName)
-        addSubview(likeButton)
+        
+        recipeImage.addSubview(likeButton)
         
         //Constraints for food Image
         addConstraintsWithFormat(format: "H:|[v0]|", views: recipeImage)
@@ -152,11 +153,8 @@ class RecipeCell: UICollectionViewCell {
         addConstraint(NSLayoutConstraint(item: recipeDescription, attribute: .width, relatedBy: .equal, toItem: recipeDetailsStackView, attribute: .width, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: recipeDescription, attribute: .height, relatedBy: .equal, toItem: self , attribute: .height, multiplier: 0, constant: 57))
         
-        //Maskes sure that stack view is not covering the like button
-        insertSubview(likeButton, aboveSubview: recipeDetailsStackView)
-        
         //Like Button Constraints
-        addConstraintsWithFormat(format: "H:[v0]-36-|", views: likeButton)
-        addConstraintsWithFormat(format: "V:[v0]-14-|", views: likeButton)
+        addConstraintsWithFormat(format: "H:[v0]-14-|", views: likeButton)
+        addConstraintsWithFormat(format: "V:|-14-[v0]", views: likeButton)
     }
 }

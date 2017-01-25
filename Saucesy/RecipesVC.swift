@@ -94,9 +94,18 @@ class RecipesVC: UICollectionViewController, UICollectionViewDelegateFlowLayout 
         navigationController?.view.layer.add(transition, forKey: nil)
         
         recipeDetail.recipe = recipe
+        
+        present(recipeDetail, animated: true, completion: nil)
+        
+        
 
-        navigationController?.pushViewController(recipeDetail, animated: true)
 
+//        navigationController?.pushViewController(recipeDetail, animated: true)
+
+    }
+    
+    func hideStatusBar(){
+        UIApplication.shared.isStatusBarHidden = true
     }
     
     //Handles phone rotation

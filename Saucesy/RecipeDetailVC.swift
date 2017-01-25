@@ -22,6 +22,7 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.shared.isStatusBarHidden = true
 
         setupViews()
         
@@ -34,30 +35,20 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         styleComponents()
         
-        print("FROM DTVC \(recipe?.healthLabels)")
-        
     }
     
     //Hides status bar of the whole apllication
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.shared.isStatusBarHidden = true
     }
     
     func dismissVC() {
-        
-        let transition = CATransition()
-        transition.duration = 0.5
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionDefault)
-        transition.type = kCATransitionFade
-        //        transition.subtype = kCATransitionFromBottom
-        navigationController?.view.layer.add(transition, forKey: nil)
-        navigationController?.pop(animated: true)
+        dismiss(animated: true, completion: nil)
 
-        
-        navigationController?.setNavigationBarHidden(false, animated: true)
         UIApplication.shared.isStatusBarHidden = false
+
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     lazy var viewRecipeButton: UIButton = {
