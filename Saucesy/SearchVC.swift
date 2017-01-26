@@ -88,13 +88,11 @@ class SearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UI
     
     
     func setupViews(){
-        
-        
-        
+
         //search bar customizations
         let textfield = searchBar.value(forKey: "searchField") as? UITextField
         textfield?.textColor = UIColor.saucesyRed
-        textfield?.backgroundColor = UIColor(red: 250/255, green: 250/255, blue: 250/255, alpha: 0.5)
+        textfield?.backgroundColor = UIColor.clear
         textfield?.attributedPlaceholder = NSAttributedString(string: "Search Ingredients                                                               ", attributes: [NSForegroundColorAttributeName:UIColor(red: 80/255, green: 105/255, blue: 126/255, alpha: 0.5), NSFontAttributeName: UIFont(name: "Avenir", size: 14)!])
         
         

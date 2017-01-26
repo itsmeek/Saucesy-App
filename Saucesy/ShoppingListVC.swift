@@ -23,6 +23,7 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
     
     var frc: NSFetchedResultsController<ShoppingList>!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,23 +104,13 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let objs = frc.fetchedObjects , objs.count > 0{
-//            let item = objs[indexPath.row]
-//            
-//            if item.purchased == false{
-//                context.delete(item)
-//                item.purchased = true
-//            }
-//        }
         
         let item = frc.object(at: indexPath)
         
-        if item.purchased == false{
-            context.delete(item)
+        if !item.purchased{
             item.purchased = true
-            
-        } else {
-            print("false")
+            context.delete(item)
+            ad.saveContext()
         }
         
     }
@@ -284,8 +275,9 @@ class ShoppingListCell: UITableViewCell{
     }
 }
 
+
 class ShoppingListFooter: UITableViewHeaderFooterView, UITextViewDelegate, UITextFieldDelegate{
-    
+
     override init(reuseIdentifier: String?){
         super.init(reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -338,15 +330,16 @@ class ShoppingListFooter: UITableViewHeaderFooterView, UITextViewDelegate, UITex
     }
     
     func instertData(text: String){
+        
         let list = ShoppingList(context: context)
-
+        
         list.item = text
         
         addField.text = ""
 
         list.purchased = false
         
-//        ad.saveContext()
+        ad.saveContext()
     }
 
 }

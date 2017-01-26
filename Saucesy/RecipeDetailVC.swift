@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import CoreData
 
 class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource, DismissDelegate {
     
@@ -110,16 +111,26 @@ class RecipeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Row \(indexPath.row + 1) selected")
         let cell = self.tableView.cellForRow(at: indexPath) as! IngredientsCell
-        cell.sendToCoreData()
+        
+        let cellIngredient = cell.recipeLabel.text
+        
+        let list = ShoppingList(context: context)
+
+        list.item = cellIngredient
+        
+        cell.toggleCheck(value: list.purchased)
+        
+        list.purchased = false
+        
+        ad.saveContext()
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print("Row \(indexPath.row + 1) delselected")
         let cell = self.tableView.cellForRow(at: indexPath) as! IngredientsCell
-        cell.sendToCoreData()
     }
     
     //Section Header

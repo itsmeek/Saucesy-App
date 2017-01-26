@@ -31,15 +31,16 @@ class IngredientsCell:UITableViewCell{
         return button
     }()
     
-    func sendToCoreData(){
+    func toggleCheck( value:Bool){
+        var value = value
         let addImage = UIImage(named: "addIcon")! as UIImage
         let addedImage = UIImage(named: "checkIcon")! as UIImage
-        if isChecked == true{
+        if value == true{
             addButton.setImage(addImage, for: .normal)
-            isChecked = false
+            value = false
         } else {
             addButton.setImage(addedImage, for: .normal)
-            isChecked = true
+            value = true
         }
     }
     
