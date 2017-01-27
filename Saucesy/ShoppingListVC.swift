@@ -109,9 +109,12 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         
         if !item.purchased{
             item.purchased = true
-            context.delete(item)
-            ad.saveContext()
+        }else{
+            item.purchased = false
         }
+        
+        ad.saveContext()
+        tableView.reloadData()
         
     }
     
@@ -119,9 +122,16 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! ShoppingListHeader
         
-        guard let section = frc.sections?[section] else {fatalError("Unexpected Section")}
+        guard let section1 = frc.sections?[section] else {fatalError("Unexpected Section")}
         
-        header.headerLabelCount.text = "\(section.numberOfObjects) Items"
+        header.headerLabelCount.text = "\(section1.numberOfObjects) Items"
+        
+        switch section{
+        case 1:
+            header.headerLabel.text = "Purchased"
+        default:
+            header.headerLabel.text = "UnPurchased"
+        }
         
         return header
     }
@@ -135,6 +145,14 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
     override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footer = tableView.dequeueReusableHeaderFooterView(withIdentifier: footerId) as! ShoppingListFooter
         
+        switch section{
+        case 1:
+            footer.isHidden = true
+        default:
+            footer.isHidden = false
+        }
+
+        
         return footer
     }
     
@@ -147,8 +165,9 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         let fetchRequest: NSFetchRequest<ShoppingList> = ShoppingList.fetchRequest()
         let dateSort = NSSortDescriptor(key: "created", ascending: false)
         fetchRequest.sortDescriptors = [dateSort]
+        let purchased = "purchased"
         
-        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: purchased, cacheName: nil)
         
         controller.delegate = self
         
@@ -169,6 +188,21 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
+    
+    
+
+//    func controller(controller: NSFetchedResultsController<ShoppingList>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+//        switch type {
+//        case .insert:
+//            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+//        case .delete:
+//            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+//        case .move:
+//            break
+//        case .update:
+//            break
+//        }
+//    }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {

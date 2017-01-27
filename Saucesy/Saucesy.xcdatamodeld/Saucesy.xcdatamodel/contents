@@ -3,7 +3,7 @@
     <entity name="ShoppingList" representedClassName="ShoppingList" syncable="YES" codeGenerationType="class">
         <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="item" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="purchased" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="purchased" optional="YES" attributeType="Boolean" syncable="YES"/>
     </entity>
     <elements>
         <element name="ShoppingList" positionX="-63" positionY="-45" width="128" height="90"/>
