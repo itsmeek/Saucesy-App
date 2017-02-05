@@ -34,7 +34,7 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         
 //        generateTestData()
         
-        attemptFetch()
+        loadSavedData()
         
         tableView = UITableView(frame: self.tableView.frame, style: .grouped)
         tableView.separatorStyle = .none
@@ -114,7 +114,7 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         }
         
         ad.saveContext()
-        tableView.reloadData()
+//        tableView.reloadData()
         
     }
     
@@ -126,11 +126,13 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         
         header.headerLabelCount.text = "\(section1.numberOfObjects) Items"
         
+        print(section1)
+        
         switch section{
-        case 1:
-            header.headerLabel.text = "Purchased"
-        default:
+        case 0:
             header.headerLabel.text = "UnPurchased"
+        default:
+            header.headerLabel.text = "Purchased"
         }
         
         return header
@@ -151,8 +153,6 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
         default:
             footer.isHidden = false
         }
-
-        
         return footer
     }
     
@@ -161,7 +161,7 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
     }
     
     //CORE DATA
-    func attemptFetch(){
+    func loadSavedData(){
         let fetchRequest: NSFetchRequest<ShoppingList> = ShoppingList.fetchRequest()
         let dateSort = NSSortDescriptor(key: "created", ascending: false)
         fetchRequest.sortDescriptors = [dateSort]
@@ -190,33 +190,22 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
     }
     
     
-
-//    func controller(controller: NSFetchedResultsController<ShoppingList>, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-//        switch type {
-//        case .insert:
-//            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
-//        case .delete:
-//            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
-//        case .move:
-//            break
-//        case .update:
-//            break
-//        }
-//    }
-    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
             
         case .insert:
-            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+            tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+//            tableView.insertSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
 
         case .delete:
-            tableView.deleteSections(NSIndexSet(index: sectionIndex) as IndexSet, with: .fade)
+            tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
             
         case .move:
+            print("MOVE")
             break
             
         case .update:
+            print("UPDATE")
             break
         }
     }
@@ -240,7 +229,6 @@ class ShoppingListVC: UITableViewController, NSFetchedResultsControllerDelegate,
             if let indexPath = newIndexPath{
                 let cell = tableView.cellForRow(at: indexPath) as! ShoppingListCell
                 updateCell(cell: cell, indexPath: indexPath as NSIndexPath)
-                
             }
             break
         case .move:
